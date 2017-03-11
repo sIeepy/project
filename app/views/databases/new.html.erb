@@ -1,2 +1,14 @@
-<h1>Databases#new</h1>
-<p>Find me in app/views/databases/new.html.erb</p>
+<% provide(:title, "New database") %>
+<h1>Create database</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@database) do |f| %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
