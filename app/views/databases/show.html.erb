@@ -1,0 +1,11 @@
+<% provide(:title, @database.db_name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= @database.db_name %>
+        <%= @database.db_owner %>
+      </h1>
+    </section>
+  </aside>
+</div>
