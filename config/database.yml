@@ -6,7 +6,7 @@
 
 development: &development
   adapter: postgresql
-  database: development1
+  database: db/development1
   username: abc
   password: password1
   host:     localhost
