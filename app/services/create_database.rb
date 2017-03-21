@@ -1,10 +1,15 @@
 class CreateDatabase
-  def creation(create_db)
-    create_db = "CREATE DATABASE  #{:db_name} OWNER + #{name}"
-    create = ActiveRecord::Base.connection.execute(create_db)
+  attr_accessor :user
+  attr_accessor :database
+
+  def initialize(db_owner, db_name)
+    @db_owner= db_owner
+    @db_name= db_name
   end
 
-  def name(user_db)
-    user_db = "#{current_user.id}#{current_user.name}"
+
+  def create_db
+      form = "CREATE DATABASE #{@db_name}"
+      ActiveRecord::Base.connection.execute(form)
   end
 end
