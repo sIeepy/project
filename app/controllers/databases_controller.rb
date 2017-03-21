@@ -7,7 +7,7 @@ class DatabasesController < ApplicationController
   def create
     @database = Database.new(database_params)
     if @database.save
-      CreateDatabase.new
+      #CreateDatabase.new
       redirect_to @database
     else
       render 'new'
