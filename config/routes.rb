@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-
-
-  get 'database/index'
-
   root 'index#home'
   get 'index/home'
   get '/signup', to: 'users#new'
