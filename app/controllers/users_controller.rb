@@ -3,10 +3,14 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   def show
     @user = User.find(params[:id])
+    id = User.find(params[:id])
+    @role = NewRole.new(id).create_role
   end
+
   def new
     @user = User.new
   end
+  
   def create
     @user = User.new(user_params)
     if @user.save
