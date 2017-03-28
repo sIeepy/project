@@ -7,7 +7,13 @@ class CreateDatabase < ApplicationController
   end
 
   def create_db
-    form = "CREATE DATABASE #{@name} OWNER #{@owner};"
-    ActiveRecord::Base.connection.execute(form)
+      check = "SELECT 1 FROM pg_database WHERE datname = '#{@name}'"
+      result = ActiveRecord::Base.connection.exec_query(check)
+    if result.present?
+            return result
+    else
+      form =  "CREATE DATABASE #{@name} OWNER #{@owner};"
+      ActiveRecord::Base.connection.execute(form)
+    end
   end
 end

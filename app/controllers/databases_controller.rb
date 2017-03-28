@@ -8,12 +8,17 @@ class DatabasesController < ApplicationController
   def create
     @database = Database.new(database_params)
     if @database.save
-
       redirect_to @database
     else
       render 'new'
     end
   end
+
+  def creation
+
+      redirect_to @database
+  end
+
 
   def edit
   end
@@ -21,7 +26,7 @@ class DatabasesController < ApplicationController
   def show
       @database = Database.find(params[:id])
       lel = Database.find(params[:id])
-      @rl_database = CreateDatabase.new(lel).create_db
+      CreateDatabase.new(lel).create_db
   end
 
   private

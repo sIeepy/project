@@ -5,8 +5,18 @@ class NewRole
       @owner = ur_id.name
     end
 
+    def chcek
+     end
+
     def create_role
-      form = "CREATE ROLE #{@owner};"
-      ActiveRecord::Base.connection.execute(form)
+        form = "DO $$
+                  BEGIN
+                    IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = '#{@owner}') THEN
+                      CREATE ROLE #{@owner} CREATEDB;
+                    END IF;
+                  END
+                $$;"
+
+        ActiveRecord::Base.connection.execute(form)
     end
 end
