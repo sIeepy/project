@@ -14,19 +14,14 @@ class DatabasesController < ApplicationController
     end
   end
 
-  def creation
-
-      redirect_to @database
-  end
-
-
   def edit
   end
 
   def show
       @database = Database.find(params[:id])
+      u_id = current_user.id
       lel = Database.find(params[:id])
-      CreateDatabase.new(lel).create_db
+      CreateDatabase.new(lel, u_id).create_db
   end
 
   private
