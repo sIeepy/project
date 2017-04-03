@@ -1,6 +1,7 @@
 class DatabasesController < ApplicationController
-  attr_accessor :user
-  attr_accessor :database
+    attr_accessor :user
+    attr_accessor :database
+    include DatabasesHelper
   def new
     @database = Database.new :db_owner => current_user.name
   end

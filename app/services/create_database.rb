@@ -11,7 +11,7 @@ class CreateDatabase < ApplicationController
       check = "SELECT 1 FROM pg_database WHERE datname = '#{@u_name}'"
       result = ActiveRecord::Base.connection.exec_query(check)
     if result.present?
-            return result
+      return result
     else
       form =  "CREATE DATABASE #{@u_name} OWNER #{@owner};"
       ActiveRecord::Base.connection.execute(form)
