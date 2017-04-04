@@ -1,0 +1,19 @@
+<%provide(:title, "Database")%>
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>
+    <table>
+    <% if @bases %>
+    <% @bases.each do |base| %>
+        <%= link_to "#", class: "btn btn-default" do %>
+            <%=base.db_name%>
+        <% end %>
+    <% end %>
+    <% else %>
+      <tr><td>No posts </td></tr>
+    <% end %>
+  </table>
+</h1>
+  </body>
+</html>

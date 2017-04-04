@@ -10,7 +10,7 @@
                 </a>
                   <ul class="dropdown-menu">
                       <li><%= link_to "New", create_path %></li>
-                      <li><%= link_to "Edit", edit_path%></li>
+                      <li><%= link_to "Show", show_database_path%></li>
                   </ul>
           </li>
             <li class="dropdown">
@@ -20,11 +20,11 @@
                       <ul class="dropdown-menu">
                           <li><%= link_to "Profile", current_user %></li>
                           <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-                          <li class="divider"></li>
+                          <li class="divider"></l i>
                           <li>
-          <%= link_to "Log out", logout_path, method: "delete" %>
-          </li>
-          </ul>
+                            <%= link_to "Log out", logout_path, method: "delete" %>
+                          </li>
+                      </ul>
           </li>
         <% else %>
 

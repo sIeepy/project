@@ -17,4 +17,10 @@ class CreateDatabase < ApplicationController
       ActiveRecord::Base.connection.execute(form)
     end
   end
+
+  def show
+    show = "SELECT * FROM pg_database WHERE datname LIKE '#{@u_name}'"
+    @show = ActiveRecord::Base.connection.execute(show)
+  end
+
 end
