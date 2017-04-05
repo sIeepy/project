@@ -1,0 +1,14 @@
+<%provide(:title, "Database")%>
+
+      <li class="dropdown">
+        <% if @bases %>
+          <% @bases.each do |base| %>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <%="#{base.db_name}"%> <b class="caret"></b> </a>
+                <ul class="dropdown-menu">
+                  <li><%= button_to "Show", edit_database_path(name: base.db_name) %></li>
+                  <li><%= button_to "lel", edit_database_path(name: base.db_name) %></li>
+                </ul>
+          <% end %>
+        <% end %>
+        </li>
