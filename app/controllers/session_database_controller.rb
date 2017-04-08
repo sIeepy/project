@@ -14,6 +14,7 @@ class SessionDatabaseController < ApplicationController
     user_db = Database.where(["db_owner = :db_owner",
                           { :db_owner => current_user.name }]).all
     if user_db && current_db
+      DatabaseConnect.new(current_db).call
       data_in current_db
       redirect_to database_url(id: current_db.id)
     else

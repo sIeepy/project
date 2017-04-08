@@ -1,9 +1,3 @@
-#development:
-#  adapter: sqlite3
-#  database: db/development.sqlite3
-#  pool: 5
-#  timeout: 5000
-
 development: &development
   adapter: postgresql
   database: db/development1
@@ -12,13 +6,6 @@ development: &development
   host:     localhost
   schema_search_path: public
   min_messages: warning
-
-
-#test:
-#  adapter: sqlite3
-#  database: db/test.sqlite3
-#  pool: 5
-#  timeout: 5000
 
 test:
   <<: *development
