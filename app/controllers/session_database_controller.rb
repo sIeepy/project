@@ -1,8 +1,14 @@
 class SessionDatabaseController < ApplicationController
   include SessionDatabaseHelper
+  skip_before_action :verify_authenticity_token
   def show
     @bases = Database.where(["db_owner = :db_owner",
                           { :db_owner => current_user.name }]).all
+
+  end
+
+  def table
+    CreateTable.new.new_table
   end
 
   def new

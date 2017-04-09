@@ -1,6 +1,7 @@
 class DatabasesController < ApplicationController
     attr_accessor :user
     attr_accessor :database
+    include SessionDatabaseHelper
 
   def new
     @database = Database.new :db_owner => current_user.name
@@ -9,6 +10,7 @@ class DatabasesController < ApplicationController
   def create
     @database = Database.new(database_params)
     if @database.save
+      data_in @database
       redirect_to @database
     else
       render 'new'

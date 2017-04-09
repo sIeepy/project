@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post '/create', to: 'databases#create'
   get '/edit', to: 'databases#edit'
   get '/show_database', to: 'session_database#show'
+  post '/new_table', to: 'session_database#table'
   get '/edit_database', to: 'session_database#new'
   post '/edit_database', to: 'session_database#create'
   delete '/user_database',  to: 'session_database#destroy'

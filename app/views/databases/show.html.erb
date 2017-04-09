@@ -5,6 +5,7 @@
       <h1>
         <%= @database.db_name %>
         <%= @database.db_owner %>
+        <%= button_to "Create", new_table_path, method: :table %>
       </h1>
     </section>
   </aside>
