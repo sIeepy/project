@@ -1,16 +1,31 @@
-development: &development
+---
+development:
   adapter: postgresql
   database: db/development1
   username: abc
   password: password1
-  host:     localhost
+  host: localhost
   schema_search_path: public
   min_messages: warning
-
 test:
-  <<: *development
+  adapter: postgresql
   database: test_database_name
-
+  username: abc
+  password: password1
+  host: localhost
+  schema_search_path: public
+  min_messages: warning
 production:
-  <<: *development
+  adapter: postgresql
   database: production_db_name
+  username: abc
+  password: password1
+  host: localhost
+  schema_search_path: public
+  min_messages: warning
+user_base:
+  adapter: postgresql
+  database: d3a
+  username: asdfasfss
+  password: ''
+  host: localhost
