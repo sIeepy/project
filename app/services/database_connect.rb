@@ -11,7 +11,6 @@ class DatabaseConnect < ApplicationController
     require 'yaml'
     d = YAML::load_file("#{Rails.root}/config/database.yml") #Load
     d['user_base']['database'] = "#{@name}"
-    d['user_base']['username'] = "#{@owner}"
     File.open("#{Rails.root}/config/database.yml", 'w') {|f| f.write d.to_yaml } #Store
   end
 end

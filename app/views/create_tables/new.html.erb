@@ -1,0 +1,32 @@
+<%provide(:title, "New table")%>
+  <h1>Create table</h1>
+    <%if data_in? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nr.</th>
+          <th>Name</th>
+          <th>Data type</th>
+        </tr>
+      </thead>
+      <%= 5.times do |n| %>
+      <tbody>
+        <tr>
+          <td><%=n%></td>
+          <td>Doe</td>
+          <td>john@example.com</td>
+        </tr>
+        <tr>
+          <td>n</td>
+          <td>Moe</td>
+          <td>mary@example.com</td>
+        </tr>
+        <tr>
+          <td>n</td>
+          <td>Dooley</td>
+          <td>july@example.com</td>
+        </tr>
+      </tbody>
+      <% end%>
+    </table>
+    <%end%>

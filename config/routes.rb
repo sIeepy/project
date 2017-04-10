@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-
-
   root 'index#home'
   get 'index/home'
   get '/signup', to: 'users#new'
@@ -12,10 +10,10 @@ Rails.application.routes.draw do
   post '/create', to: 'databases#create'
   get '/edit', to: 'databases#edit'
   get '/show_database', to: 'session_database#show'
-  post '/new_table', to: 'session_database#table'
-  get '/edit_database', to: 'session_database#new'
-  post '/edit_database', to: 'session_database#create'
-  delete '/user_database',  to: 'session_database#destroy'
+  get '/connect_database', to: 'session_database#new'
+  post '/connect_database', to: 'session_database#create'
+  delete '/disconnect_database',  to: 'session_database#destroy'
+  post '/new_table', to: 'create_tables#new'
   resources :users
   resources :databases
 

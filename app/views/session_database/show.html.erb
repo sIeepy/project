@@ -7,14 +7,14 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <%="#{base.db_name}"%> <b class="caret"></b> </a>
                   <ul class="dropdown-menu">
-                    <li><%= button_to "Show", edit_database_path(name: base.db_name) %></li>
-                    <li><%= button_to "lel", edit_database_path(name: base.db_name) %></li>
+                    <li><%= button_to "Show", new_table_path, method: :table %></li>
+                    <li><%= button_to "lel", connect_database_path(name: base.db_name) %></li>
                   </ul>
             <%else%>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <%="#{base.db_name}"%> <b class="caret"></b> </a>
                 <ul class="dropdown-menu">
-                  <li><%= button_to "dupa", edit_database_path(name: base.db_name) %></li>
+                  <li><%= button_to "dupa", connect_database_path(name: base.db_name) %></li>
                 </ul>
                 <% end %>
           <% end %>

@@ -1,10 +1,11 @@
 ---
 development:
   adapter: postgresql
-  database: db/development1
+  database: development1
   username: abc
   password: password1
   host: localhost
+  pool: 5
   schema_search_path: public
   min_messages: warning
 test:
@@ -25,7 +26,8 @@ production:
   min_messages: warning
 user_base:
   adapter: postgresql
-  database: d3a
-  username: asdfasfss
-  password: ''
+  database: d3saf
+  username: abc
+  pool: 5
+  password: password1
   host: localhost
