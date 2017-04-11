@@ -6,12 +6,18 @@ class CreateTable < ApplicationController
     end
   end
 
-  ReadDatabaseConnection.establish_connection(:user_base)
   def new_table
-    create_table = "CREATE TABLE ele (
+    connection = ReadDatabaseConnection.establish_connection(
+      adapter: 'postgresql',
+      database: 'd2aaa',
+      username: 'abc',
+      password: 'password1',
+      host: 'localhost',
+        ).connection
+    create_table = "CREATE TABLE awsseale (
                               did     integer,
                               name    varchar(40) UNIQUE);"
-    ActiveRecord::Base.connection.execute(create_table)
+    ReadDatabaseConnection.connection.execute(create_table)
   end
 
 

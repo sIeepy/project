@@ -6,24 +6,15 @@ development:
   password: password1
   host: localhost
   pool: 5
-
 test:
   adapter: postgresql
   database: test_database_name
   username: abc
   password: password1
   host: localhost
-
 production:
   adapter: postgresql
   database: production_db_name
-  username: abc
-  password: password1
-  host: localhost
-
-development_user:
-  adapter: postgresql
-  database: d3saf
   username: abc
   password: password1
   host: localhost

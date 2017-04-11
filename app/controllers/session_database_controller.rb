@@ -8,10 +8,6 @@ class SessionDatabaseController < ApplicationController
 
   end
 
-
-
-
-
   def new
 
   end
@@ -22,7 +18,6 @@ class SessionDatabaseController < ApplicationController
                           { :db_owner => current_user.name }]).all
     u_id = current_user.id
     if user_db && current_db
-      DatabaseConnect.new(current_db, u_id).call
       data_in current_db
       redirect_to database_url(id: current_db.id)
     else
