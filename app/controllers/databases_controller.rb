@@ -1,8 +1,6 @@
 class DatabasesController < ApplicationController
     attr_accessor :user
     attr_accessor :database
-    include SessionDatabaseHelper
-
   def new
     @database = Database.new :db_owner => current_user.name
   end
@@ -22,10 +20,9 @@ class DatabasesController < ApplicationController
 
   def show
       @database = Database.find(params[:id])
-      u_id = current_user.id
-      lel = Database.find(params[:id])
-      CreateDatabase.new(lel, u_id).create_db
-
+      ur_id = current_user.id
+      db_id = current_database.id
+      CreateDatabase.new(db_id, ur_id).create_db
   end
 
   private

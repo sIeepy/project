@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   get '/connect_database', to: 'session_database#new'
   post '/connect_database', to: 'session_database#create'
   delete '/disconnect_database',  to: 'session_database#destroy'
-  post '/new_table', to: 'create_tables#new'
+  get 'new_table', to: 'create_tables#new'
+  post 'new_table', to: 'create_tables#new'
   resources :users
   resources :databases
 
