@@ -1,9 +1,9 @@
 class ConnectDatabase < ApplicationController
 
   def initialize(database, user)
-    @ur_id = user
-    @db_id = database
-    @name ="d#{@ur_id}#{@db_id}".underscore
+    db_id = Database.find(database)
+    user_id = User.find(user)
+    @name ="d#{user_id.id}#{db_id.db_name}".underscore
   end
 
   class RemoteConnect < ActiveRecord::Base
@@ -14,11 +14,16 @@ class ConnectDatabase < ApplicationController
   end
 
   def connection
-    connection = RemoteConnect.establish_connection({
-                :adapter => 'postgresql',
-                :database => "#{@name}",
-                :username => 'user',
-                :password => 'user1',
-                :host => 'localhost'}).connection
+    @connect_p = {adapter: 'postgresql',
+                  database: "#{@name}",
+                  username: 'user',
+                  password: 'user1',
+                  host: 'localhost'}
+  end
+end
+
+class Connection < ConnectDatabase
+  def connect
+    connect = RemoteConnect.establish_connection(@connect_p).connection
   end
 end

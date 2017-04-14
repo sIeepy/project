@@ -3,7 +3,7 @@ class CreateTable < ApplicationController
   def new_table
     database = current_database
     user = current_user
-    ConnectDatabase.new(database, user).connection
+    Connection.new.connect
     create_table = "CREATE TABLE awsseale (
                               did     integer,
                               name    varchar(40) UNIQUE);"
