@@ -1,9 +1,11 @@
 class CreateTable < ApplicationController
-
+  def initialize(database, user)
+    @database = database
+    @user = user
+  end
   def new_table
-    database = current_database
-    user = current_user
-    Connection.new.connect
+
+    connect = ConnectDatabase.new(@database, @user).connection
     create_table = "CREATE TABLE awsseale (
                               did     integer,
                               name    varchar(40) UNIQUE);"

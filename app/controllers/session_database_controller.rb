@@ -10,9 +10,7 @@ class SessionDatabaseController < ApplicationController
 
   def create
     database = Database.find_by(db_name: params[:name])
-    u_id = current_user
     if database
-      ConnectDatabase.new(database, u_id).connection
       data_in database
       redirect_to database_url(id: database.id)
     else

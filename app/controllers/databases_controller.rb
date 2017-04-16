@@ -23,7 +23,6 @@ class DatabasesController < ApplicationController
       ur_id = current_user.id
       db_id = current_database.id
       CreateDatabase.new(db_id, ur_id).create_db
-      ConnectDatabase.new(db_id, ur_id).connection
   end
 
   private

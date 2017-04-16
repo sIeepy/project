@@ -1,5 +1,8 @@
 class CreateTablesController < ApplicationController
+    skip_before_action :verify_authenticity_token
   def new
-    CreateTable.new.new_table
+    database = current_database.db_name
+    user = current_user.id
+    CreateTable.new(database, user).new_table
   end
 end
