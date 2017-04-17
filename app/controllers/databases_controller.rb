@@ -1,6 +1,5 @@
 class DatabasesController < ApplicationController
-    attr_accessor :user
-    attr_accessor :database
+
   def new
     @database = Database.new :db_owner => current_user.name
   end
@@ -9,6 +8,9 @@ class DatabasesController < ApplicationController
     @database = Database.new(database_params)
     if @database.save
       data_in @database
+      ur_id = current_user.id
+      db_id = current_database.id
+      CreateDatabase.new(db_id, ur_id).create_db
       redirect_to @database
     else
       render 'new'
@@ -19,10 +21,7 @@ class DatabasesController < ApplicationController
   end
 
   def show
-      @database = Database.find(params[:id])
-      ur_id = current_user.id
-      db_id = current_database.id
-      CreateDatabase.new(db_id, ur_id).create_db
+    @database = Database.find(params[:id])
   end
 
   private

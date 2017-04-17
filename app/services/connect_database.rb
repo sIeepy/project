@@ -1,4 +1,4 @@
-class ConnectDatabase < ApplicationController
+class ConnectDatabase
   def initialize(database, user)
     @database = database
     @user = user
@@ -9,14 +9,15 @@ class ConnectDatabase < ApplicationController
   end
 
   def connection
-    connection = RemoteConnect.establish_connection(
-                adapter: 'postgresql',
-                database: "#{name}",
-                username: 'user',
-                password: 'user1',
-                host: 'localhost').connection
-    end
+    RemoteConnect.establish_connection(adapter: 'postgresql',
+                                        database: "#{name}",
+                                        username: 'user',
+                                        password: 'user1',
+                                        host: 'localhost'
+                                                          ).connection
+  end
 end
+
 class RemoteConnect < ActiveRecord::Base
   def self.abstract_class?
     true
