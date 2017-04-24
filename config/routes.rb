@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'index#home'
   get 'index/home'
   get '/signup', to: 'users#new'
@@ -12,10 +11,11 @@ Rails.application.routes.draw do
   get '/show_database', to: 'session_database#show'
   get '/connect_database', to: 'session_database#new'
   post '/connect_database', to: 'session_database#create'
-  delete '/disconnect_database',  to: 'session_database#destroy'
-  get 'new_table', to: 'create_tables#new'
-  post 'new_table', to: 'create_tables#new'
+  delete '/disconnect_database', to: 'session_database#destroy'
+  get 'new_table', to: 'tables#new'
+  post 'new_table', to: 'tables#new'
+  get 'new_table/success', to: 'tables#success', as: :success
+  resources :tables, only: [:new, :create]
   resources :users
   resources :databases
-
 end

@@ -14,7 +14,7 @@ class ConnectDatabase
                                         username: 'user',
                                         password: 'user1',
                                         host: 'localhost'
-                                                          ).connection
+                                        ).connection
   end
 end
 
