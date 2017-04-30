@@ -1,0 +1,2 @@
+module EditTablesHelper
+end

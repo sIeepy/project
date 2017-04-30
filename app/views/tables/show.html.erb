@@ -1,0 +1,15 @@
+<% provide(:title, "Tables") %>
+<h1><%=@database%></br></h1>
+<% @poka.each do |po| %>
+  <div class="btn-group">
+    <%hidden_field_tag "#{po}"%>
+    <%=link_to "#{po}", edit_table_show_path(table_name: po), method: :show, class: "btn btn-primary", role: "button"%>
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li><%= button_to "Create new table"%></li>
+      <li><%= button_to "lel", ""%></li>
+    </ul>
+  </div>
+<%end%>

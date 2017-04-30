@@ -1,13 +1,12 @@
 <%provide(:title, "Database")%>
 
       <li class="dropdown">
-        <% if @bases %>
           <% @bases.each do |base| %>
             <% if data_in? %>
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <%="#{base.db_name}"%> <b class="caret"></b> </a>
                   <ul class="dropdown-menu">
-                    <li><%= button_to "Show", new_table_path(id: base.id), method: :table %></li>
+                    <li><%= button_to "Create new table", new_table_path(id: base.id), method: :table %></li>
                     <li><%= button_to "lel", ""%></li>
                   </ul>
             <%else%>
@@ -18,5 +17,4 @@
                 </ul>
                 <% end %>
           <% end %>
-        <% end %>
         </li>

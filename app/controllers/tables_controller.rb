@@ -6,7 +6,6 @@ class TablesController < ApplicationController
 
   def create
     @table = Table.new(table_params)
-    respond_to do |format|
       if @table.valid?
         ur_id = current_user.id
         db_id = current_database.db_name
@@ -14,15 +13,18 @@ class TablesController < ApplicationController
         r_n = params[:table][:row_1]
         d_n = params[:table][:data_1]
         CreateTable.new(db_id, ur_id, t_n, r_n, d_n).new_table
-        format.html { redirect_to success_path, notice: 'Feedback' }
+        redirect_to edit_table_show_path(table_name: t_n)
       else
-        format.html { render :new }
+        render new
       end
-    end
   end
 
-   def success
-   end
+  def show
+    ur_id = current_user.id
+    db_id = current_database.db_name
+    @database = db_id
+    @poka = ShowTables.new(db_id, ur_id).show_tables
+  end
 
   private
 
