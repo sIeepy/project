@@ -1,20 +1,19 @@
 <%provide(:title, "Database")%>
-
-      <li class="dropdown">
-          <% @bases.each do |base| %>
-            <% if data_in? %>
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <%="#{base.db_name}"%> <b class="caret"></b> </a>
-                  <ul class="dropdown-menu">
-                    <li><%= button_to "Create new table", new_table_path(id: base.id), method: :table %></li>
-                    <li><%= button_to "lel", ""%></li>
-                  </ul>
-            <%else%>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <%="#{base.db_name}"%> <b class="caret"></b> </a>
-                <ul class="dropdown-menu">
-                  <li><%= button_to "dupa", :session, connect_database_path(name: base.db_name)%></li>
-                </ul>
-                <% end %>
+    <% @bases.each do |base| %>
+    <div class="btn-group">
+      <%=link_to "#{base.db_name}", "", class: "btn btn-primary", role: "button"%>
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+          <% if data_in? %>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Create new table", new_table_path(id: base.id)%></li>
+              <li><%= link_to "Show tables", show_table_path%></li>
+            </ul>
+          <%else%>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Connect to database", :session, connect_database_path(name: base.db_name)%></li>
+            </ul>
           <% end %>
-        </li>
+        </div>
+    <% end %>

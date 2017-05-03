@@ -14,7 +14,7 @@
 <thead>
   <th>
    <%= f.label :table_name %><br>
-   <%= f.text_field :table_name %>
+   <%= f.text_field :table_name%>
  </th>
  </thead>
  <tbody>
@@ -38,4 +38,4 @@
 </td>
 </tr>
 </table>
-<%= link_to 'Back', new_table_path %>
+<%= link_to 'Back', show_database_path, class: "btn btn-primary", role: "button" %>

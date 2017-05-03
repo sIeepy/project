@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'index#home'
   get 'index/home'
   get '/signup', to: 'users#new'
@@ -15,7 +14,8 @@ Rails.application.routes.draw do
   delete '/disconnect_database', to: 'session_database#destroy'
   get 'new_table', to: 'tables#new'
   post 'new_table', to: 'tables#new'
-  get 'new_table/show', to: 'tables#show'
+  get 'show_table', to: 'tables#show'
+  post 'show_table', to: 'tables#show'
   get 'edit_table/show', to: 'edit_tables#show'
   post 'edit_table/show', to: 'edit_tables#show'
   get 'edit_table/edit', to: 'edit_tables#edit'
