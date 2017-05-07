@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'edit_table/show', to: 'edit_tables#show'
   post 'edit_table/show', to: 'edit_tables#show'
   get 'edit_table/edit', to: 'edit_tables#edit'
+
   resources :tables
   resources :users
   resources :databases

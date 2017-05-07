@@ -1,21 +1,8 @@
 <% provide(:title, "#{@table}") %>
   <h1><%= @table %></h1>
-<table class="table">
-    <thead>
-      <th>Column name</th>
-      <th>Data type</th>
-    </thead>
-<% @row.each do |r|%>
-<tbody>
-    <tr>
-      <td>
-    <%= "#{r.name}"%>
-      </td>
-      <td>
-      <%="#{r.type.to_s}" %>
-      </td>
-    </tr>
-  </tbody>
 
-</table>
+<% @row.each do |r|%>
+
+    <p><%="#{r.name} #{r.type}"%></p>
+
 <%end%>

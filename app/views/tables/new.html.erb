@@ -1,41 +1,11 @@
 <% provide(:title, "New table") %>
-<table class ="table">
-<%= form_for(@table) do |f| %>
- <% if @table.errors.any? %>
-   <div id="error_explanation">
-     <h2><%= pluralize(@table.errors.count, "error") %> prohibited this table from being saved:</h2>
-     <ul>
-     <% @table.errors.full_messages.each do |message| %>
-       <li><%= message %></li>
-     <% end %>
-     </ul>
-   </div>
- <% end %>
-<thead>
-  <th>
-   <%= f.label :table_name %><br>
-   <%= f.text_field :table_name%>
- </th>
- </thead>
- <tbody>
-   <tr>
-     <td>
-   <%= f.label :row_1 %>
-    </td>
-    <td>
-   <%= f.text_field :row_1 %>
-    </td>
-    <td>
-      <%= f.select :data_1, options_for_select([["text", "text"], ["boolean", "boolean"], ["integer", "integer"]]) %>
- </tr>
- <tr>
-   <td>
- <div class="actions">
-   <%= f.submit %>
- </div>
+<%= form_for @table do |f| %>
+      <%= f.label :table_name %><br>
+      <%= f.text_field :table_name%>
 
+      <%= render "fields", index: 0%>
+
+      <%=button_tag 'Add more', type: 'button', id: 'add-column',
+             data: { fields: render('fields', index: '__INDEX__').gsub('\n', '') }%>
+  <%= f.submit %>
 <% end %>
-</td>
-</tr>
-</table>
-<%= link_to 'Back', show_database_path, class: "btn btn-primary", role: "button" %>

@@ -1,2 +1,24 @@
-<h1>EditTables#edit</h1>
-<p>Find me in app/views/edit_tables/edit.html.erb</p>
+<% provide(:title, "#{@table}") %>
+  <h1><%= @table %></h1>
+<table class="table">
+    <thead>
+      <th>Column name</th>
+      <th>Data type</th>
+    </thead>
+<% @row.each do |r|%>
+<tbody>
+    <tr>
+      <td>
+    <%= "#{r.name}"%>
+      </td>
+      <td>
+      <%="#{r.type.to_s}" %>
+      </td>
+      <td>
+        <%= button_to "Delete", edit_table_path, method: :delete_t%>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+<%end%>
