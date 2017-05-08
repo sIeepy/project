@@ -12,7 +12,7 @@ class DatabasesController < ApplicationController
       db_nm = current_database.db_name
       db_ur = current_database.db_owner
       CreateDatabase.new(db_nm, ur_id, db_ur).create_db
-      CreateSchema.new(db_nm, ur_id, db_ur).create_schema
+      CreateDatabase.new(db_nm, ur_id, db_ur).create_schema
       redirect_to @database
     else
       render 'new'

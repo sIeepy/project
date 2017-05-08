@@ -1,4 +1,4 @@
-class CreateDatabase < ApplicationController
+class CreateDatabase
 
   def initialize(db_nm, ur_id, db_ur)
     @database = db_nm
@@ -18,4 +18,8 @@ class CreateDatabase < ApplicationController
     end
   end
 
+  def create_schema
+    ConnectDatabase.new(@database, @user).connection
+    RemoteConnect.connection.execute("CREATE SCHEMA IF NOT EXISTS trash")
+  end
 end

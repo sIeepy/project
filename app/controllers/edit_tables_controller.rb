@@ -21,6 +21,11 @@ class EditTablesController < ApplicationController
 
 
   def delete
+    @table = params[:table_name]
+    ur_id = current_user.id
+    db_id = current_database.db_name
+    DeleteTable.new(db_id, ur_id, @table).delete_table
+    redirect_to show_table_path
   end
 
 end
