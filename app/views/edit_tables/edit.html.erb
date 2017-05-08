@@ -1,16 +1,24 @@
 <% provide(:title, "#{@table}") %>
-<h1><%= @table %></h1>
+<%= form_for(:table_edit, url: update_path) do |f| %>
+<h1><%=f.text_field :table_name, placeholder: "#{@table}" %></h1>
+    <%= f.hidden_field('old_t', value: "#{@table}")%>
 <table class="table">
 <thead>
   <th>Column name</th>
   <th>Data type</th>
 </thead>
 <tbody>
-<% @row.each do |r|%>
+<% @row.each_with_index do |r, i|%>
 <tr>
-  <td><%= "#{r.name}" %></td>
-  <td><%= "#{r.type}" %></td>
+  <td><%= f.text_field :row, placeholder: "#{r.name}", index: "#{i}" %>
+      <%= f.hidden_field('old_r', value: "#{r.name}", index: "#{i}")%></td>
+  <td><%= f.select :data, %w[text boolean integer], {include_blank: "#{r.type}"}, { index: "#{i}" }  %>
+      <%= f.hidden_field('old_t', value: "#{r.type}", index: "#{i}")%></td>
 </tr>
+
 <%end%>
-<tbody>
+</tbody>
 </table>
+
+  <%= f.submit "Update" %>
+<% end %>

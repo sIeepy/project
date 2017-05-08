@@ -20,7 +20,8 @@ Rails.application.routes.draw do
   post 'edit_table/show', to: 'edit_tables#show'
   get 'edit_table/edit', to: 'edit_tables#edit'
   get 'edit_table/delete', to: 'edit_tables#delete'
-
+  post 'update_table', to: 'edit_tables#update', as: 'update'
+  
   resources :tables
   resources :users
   resources :databases

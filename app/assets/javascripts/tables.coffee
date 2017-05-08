@@ -12,13 +12,3 @@ $(document).on 'ready page:change', ->
   	    btn.before btn.data('fields').replace(/__INDEX__/g, counter++)
      return
    return
-
-$(document).on 'ready page:change', ->
- $('#remove-column').click ->
-    if counter == 0
-      	alert 'You have reached the limit of adding ' + counter + ' inputs'
-      else
-	      btn = $(this)
-  	    btn.before btn.data('fields').replace(/__INDEX__/g, counter++)
-     return
-   return

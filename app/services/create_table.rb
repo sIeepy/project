@@ -1,16 +1,20 @@
 class CreateTable < ApplicationController
   def initialize(database, user, table)
     @t_name = table[:table_name]
-    c1 = []
-    table.values.each { |k, v| c1 << k }
-    c1.shift
-    @row = c1.map { |h| h['row'] }
-    @data = c1.map { |h| h['data'] }
+    split(table)
     @database = database
     @user = user
     @output = @row.zip @data
     @c2 = []
     @output.each { |x, y| @c2 << "#{x} #{y}" }
+  end
+
+  def split(table)
+    c1 = []
+    table.values.each { |k, v| c1 << k }
+    c1.shift
+    @row = c1.map { |h| h['row'] }
+    @data = c1.map { |h| h['data'] }
   end
 
   def new_table

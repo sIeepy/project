@@ -1,0 +1,6 @@
+<fieldset>
+  <%= fields_for :table do |f| %>
+  <%= f.text_field :row, index: index  %>
+  <%= f.select :table, %w[text boolean integer], {}, { index: index }%>
+  <%end%>
+</fieldset>
