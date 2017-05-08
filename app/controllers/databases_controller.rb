@@ -9,8 +9,10 @@ class DatabasesController < ApplicationController
     if @database.save
       data_in @database
       ur_id = current_user.id
-      db_id = current_database.id
-      CreateDatabase.new(db_id, ur_id).create_db
+      db_nm = current_database.db_name
+      db_ur = current_database.db_owner
+      CreateDatabase.new(db_nm, ur_id, db_ur).create_db
+      CreateSchema.new(db_nm, ur_id, db_ur).create_schema
       redirect_to @database
     else
       render 'new'

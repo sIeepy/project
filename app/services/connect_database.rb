@@ -11,8 +11,8 @@ class ConnectDatabase
   def connection
     RemoteConnect.establish_connection(adapter: 'postgresql',
                                         database: "#{name}",
-                                        username: 'user',
-                                        password: 'user1',
+                                        username: 'admin',
+                                        password: 'admin1',
                                         host: 'localhost'
                                         ).connection
   end

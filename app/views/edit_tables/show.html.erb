@@ -1,8 +1,16 @@
 <% provide(:title, "#{@table}") %>
   <h1><%= @table %></h1>
-
+<table class="table">
+  <thead>
+    <th>Column name</th>
+    <th>Data type</th>
+  </thead>
+<tbody>
 <% @row.each do |r|%>
-
-    <p><%="#{r.name} #{r.type}"%></p>
-
+  <tr>
+    <td><%= "#{r.name}" %></td>
+    <td><%= "#{r.type}" %></td>
+  </tr>
 <%end%>
+<tbody>
+</table>

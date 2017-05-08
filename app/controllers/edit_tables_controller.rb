@@ -6,7 +6,8 @@ class EditTablesController < ApplicationController
     @row = TablesContent.new(db_id, ur_id, @table).tables_content
   end
 
-  def edit_t
+  def edit
+    @table = params[:table_name]
     ur_id = current_user.id
     db_id = current_database.db_name
     @row = TablesContent.new(db_id, ur_id, @table).tables_content
@@ -19,8 +20,7 @@ class EditTablesController < ApplicationController
   end
 
 
-  def delete_t
-
+  def delete
   end
 
 end
