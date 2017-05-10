@@ -14,8 +14,8 @@ class EditTable
     c1.shift
     @col = c1.map { |h| h['row'] }
     @data = c1.map { |h| h['data'] }
-    @old_c = c1.map { |h| h['old_r'] }
-    @old_t = c1.map { |h| h['old_t'] }
+    @old_c = c1.map { |h| h['old_c'] }
+    @old_d = c1.map { |h| h['old_d'] }
   end
 
   def empty_c(fresh, old)
@@ -32,12 +32,12 @@ class EditTable
   end
 
   def empty_d(fresh, col)
-    tog = fresh.zip col
-    @new_d = tog.reject { |f, c| f.blank? }
+    tog = fresh.zip(col, @old_d)
+    @new_d = tog.reject { |f, c, d| f.blank? || d == f}
     unless @new_d.empty?
       @fresh_d = []
       @col = []
-      @new_d.each do |f, c|
+      @new_d.each do |f, c, d|
         @fresh_d << f
         @col << c
       end

@@ -11,7 +11,7 @@ class EditTablesController < ApplicationController
     ur_id = current_user.id
     db_id = current_database.db_name
     @row = TablesContent.new(db_id, ur_id, @table).tables_content
-    @size = @row.size
+    #@size = @row.size
   end
 
   def update
@@ -30,5 +30,4 @@ class EditTablesController < ApplicationController
     DeleteTable.new(db_id, ur_id, @table).delete_table
     redirect_to show_table_path
   end
-
 end

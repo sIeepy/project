@@ -11,9 +11,9 @@
 <% @row.each_with_index do |r, i|%>
 <tr>
   <td><%= f.text_field :row, placeholder: "#{r.name}", index: "#{i}" %>
-      <%= f.hidden_field('old_r', value: "#{r.name}", index: "#{i}")%></td>
+      <%= f.hidden_field('old_c', value: "#{r.name}", index: "#{i}")%></td>
   <td><%= f.select :data, %w[text boolean integer], {include_blank: "#{r.type}"}, { index: "#{i}" }  %>
-      <%= f.hidden_field('old_t', value: "#{r.type}", index: "#{i}")%></td>
+      <%= f.hidden_field('old_d', value: "#{r.type}", index: "#{i}")%></td>
 </tr>
 
 <%end%>

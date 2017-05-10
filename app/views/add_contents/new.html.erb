@@ -1,0 +1,29 @@
+<% provide(:title, "#{@table}") %>
+  <h1><%= @table %></h1>
+<table class="table">
+  <thead>
+  <% @row.each do |r|%>
+    <th>
+      <%= "#{r.name}" %>
+    </th>
+    <%end%>
+  </thead>
+<tbody>
+  <tr>
+    <td></td>
+  </tr>
+  <%= form_for(:content, url: add_content_path) do |f| %>
+    <%= f.hidden_field :table_name, value: @table %>
+<tr>
+  <% @row.each_with_index do |r,i|%>
+    <td>
+    <%= f.fields_for :con do |w|%>
+      <%= w.text_field "#{i}"%>
+    <% end %>
+    </td>
+  <%end%>
+</tr>
+<tbody>
+</table>
+<%= f.submit %>
+<%end%>

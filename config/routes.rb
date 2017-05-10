@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'index#home'
   get 'index/home'
   get '/signup', to: 'users#new'
@@ -21,7 +22,10 @@ Rails.application.routes.draw do
   get 'edit_table/edit', to: 'edit_tables#edit'
   get 'edit_table/delete', to: 'edit_tables#delete'
   post 'update_table', to: 'edit_tables#update', as: 'update'
-  
+  get 'add_contents/new', to: 'add_contents#new', as: 'new_content'
+  post 'add_contents/add', to: 'add_contents#add', as: 'add_content'
+  get 'add_contents/show', to: 'add_contents#show', as: 'show_content'
+
   resources :tables
   resources :users
   resources :databases

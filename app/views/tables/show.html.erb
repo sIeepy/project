@@ -2,7 +2,7 @@
 <h1><%=@database%></br></h1>
 <% @poka.each do |po| %>
   <div class="btn-group">
-    <%=link_to "#{po}", "", class: "btn btn-primary", role: "button"%>
+    <%=link_to "#{po}", show_content_path(table_name: po), class: "btn btn-primary", role: "button"%>
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
       <span class="caret"></span>
     </button>
