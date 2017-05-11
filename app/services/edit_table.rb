@@ -16,15 +16,16 @@ class EditTable
     @data = c1.map { |h| h['data'] }
     @old_c = c1.map { |h| h['old_c'] }
     @old_d = c1.map { |h| h['old_d'] }
+    @delete = c1.map { |h| h['destroy']}
   end
 
   def empty_c(fresh, old)
-    tog = fresh.zip old
-    @new_a = tog.reject { |f, o| f.blank? }
+    tog = fresh.zip(old, @delete)
+    @new_a = tog.reject { |f, o, d| f.blank? || d == 1}
     unless @new_a.empty?
       @fresh_a = []
       @old_a = []
-      @new_a.each do |f, o|
+      @new_a.each do |f, o, d|
         @fresh_a << f
         @old_a << o
       end
@@ -32,15 +33,36 @@ class EditTable
   end
 
   def empty_d(fresh, col)
-    tog = fresh.zip(col, @old_d)
-    @new_d = tog.reject { |f, c, d| f.blank? || d == f}
+    tog = fresh.zip(col, @old_d, @delete)
+    @new_d = tog.reject { |f, c, o, d| f.blank? || o == f || d == 1 }
     unless @new_d.empty?
       @fresh_d = []
       @col = []
-      @new_d.each do |f, c, d|
+      @new_d.each do |f, c, o, d|
         @fresh_d << f
         @col << c
       end
+    end
+  end
+
+  def drop
+    tog = @old_c.zip @delete
+    @d_list = tog.reject { |o, d| d == '0' }
+    unless @d_list.empty?
+      @del = []
+      @d_list.each do |i, j|
+        @del << i
+      end
+    end
+  end
+
+  def drop_col
+    ConnectDatabase.new(@database, @user).connection
+    drop
+    if @table_name != ''
+      @d_list.size.times { |i| drop_com(@table_name, @del[i]) }
+    else
+      @d_list.size.times { |i| drop_com(@table_name_old, @del[i]) }
     end
   end
 
@@ -64,6 +86,11 @@ class EditTable
   def data_name(table, col, dat_n)
     dat_name = "ALTER TABLE #{table} ALTER COLUMN #{col} TYPE #{dat_n} USING (#{col}::#{dat_n})"
     RemoteConnect.connection.execute(dat_name)
+  end
+
+  def drop_com(table, col)
+    drop = "ALTER TABLE #{table} DROP COLUMN IF EXISTS #{col} CASCADE"
+    RemoteConnect.connection.execute(drop)
   end
 
   def rename_row

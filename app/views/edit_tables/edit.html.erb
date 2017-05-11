@@ -6,14 +6,19 @@
 <thead>
   <th>Column name</th>
   <th>Data type</th>
+  <th>Remove</th>
 </thead>
 <tbody>
 <% @row.each_with_index do |r, i|%>
 <tr>
-  <td><%= f.text_field :row, placeholder: "#{r.name}", index: "#{i}" %>
-      <%= f.hidden_field('old_c', value: "#{r.name}", index: "#{i}")%></td>
-  <td><%= f.select :data, %w[text boolean integer], {include_blank: "#{r.type}"}, { index: "#{i}" }  %>
-      <%= f.hidden_field('old_d', value: "#{r.type}", index: "#{i}")%></td>
+  <td><%= f.text_field :row, placeholder: r.name.to_s, index: i %>
+      <%= f.hidden_field('old_c', value: r.name.to_s, index: i)%></td>
+  <td><%= f.label "#{r.type}"%>
+    <% if @check.blank? %>
+      <%= f.select :data, %w[text boolean integer], {include_blank: true}, { index: i } %>
+    <%end%>
+      <%= f.hidden_field('old_d', value: r.type.to_s, index: i)%></td>
+ <td> <%= f.check_box :destroy, index: i %></td>
 </tr>
 
 <%end%>
