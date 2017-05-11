@@ -10,12 +10,13 @@
     <% end %>
   </thead>
 <tbody>
-
+<% @show.map.each do |row| %>
   <tr>
-    <td></td>
-    <td></td>
+    <% row.values.each do |col| %>
+      <td> <%= col %> </td>
+    <% end %>
   </tr>
-
+<% end %>
 <tbody>
 <%= link_to "Add content", new_content_path(table_name: @table)%>
 </table>

@@ -4,14 +4,18 @@
   <thead>
   <% @row.each do |r|%>
     <th>
-      <%= "#{r.name}" %>
+      <%= r.name.to_s %>
     </th>
     <%end%>
   </thead>
 <tbody>
-  <tr>
-    <td></td>
-  </tr>
+  <% @show.map.each do |row| %>
+    <tr>
+      <% row.values.each do |col| %>
+        <td> <%= col %> </td>
+      <% end %>
+    </tr>
+  <% end %>
   <%= form_for(:content, url: add_content_path) do |f| %>
     <%= f.hidden_field :table_name, value: @table %>
 <tr>

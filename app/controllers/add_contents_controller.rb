@@ -5,7 +5,6 @@ class AddContentsController < ApplicationController
     @table = params[:table_name]
     @row = TablesContent.new(db_id, ur_id, @table).tables_content
     @show = ShowContent.new(db_id, ur_id, @table).show_content
-    binding.pry
   end
 
   def add
@@ -22,5 +21,6 @@ class AddContentsController < ApplicationController
     db_id = current_database.db_name
     @table = params[:table_name]
     @row = TablesContent.new(db_id, ur_id, @table).tables_content
+    @show = ShowContent.new(db_id, ur_id, @table).show_content
   end
 end
