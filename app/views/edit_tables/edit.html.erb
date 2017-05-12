@@ -1,5 +1,5 @@
 <% provide(:title, "#{@table}") %>
-<%= form_for(:table_edit, url: update_path) do |f| %>
+<%= form_for(:table_edit, url: update_path, :html => {:autocomplete => "off"}) do |f| %>
 <h1><%=f.text_field :table_name, placeholder: "#{@table}" %></h1>
     <%= f.hidden_field('old_t', value: "#{@table}")%>
 <table class="table">

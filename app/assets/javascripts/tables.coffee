@@ -4,7 +4,7 @@
 counter = 1
 limit = 10
 $(document).on 'ready page:change', ->
- $('#add-column').click ->
+  $('#add-column').click ->
     if counter == limit
       	alert 'You have reached the limit of adding ' + counter + ' inputs'
       else

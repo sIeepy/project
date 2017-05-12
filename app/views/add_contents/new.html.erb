@@ -16,7 +16,7 @@
       <% end %>
     </tr>
   <% end %>
-  <%= form_for(:content, url: add_content_path) do |f| %>
+  <%= form_for(:content, url: add_content_path, :html => {:autocomplete => "off"}) do |f| %>
     <%= f.hidden_field :table_name, value: @table %>
 <tr>
   <% @row.each_with_index do |r,i|%>

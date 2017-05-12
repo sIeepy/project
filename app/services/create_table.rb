@@ -6,6 +6,7 @@ class CreateTable < ApplicationController
     @user = user
     @output = @row.zip @data
     @c2 = []
+    @output.each
     @output.each { |x, y| @c2 << "#{x} #{y}" }
   end
 
@@ -13,7 +14,7 @@ class CreateTable < ApplicationController
     c1 = []
     table.values.each { |k, v| c1 << k }
     c1.shift
-    @row = c1.map { |h| h['row'] }
+    @row = c1.map { |h| h['row'].gsub(/\s+/, '_') }
     @data = c1.map { |h| h['data'] }
   end
 

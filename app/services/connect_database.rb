@@ -18,6 +18,7 @@ class ConnectDatabase
   end
 end
 
+
 class RemoteConnect < ActiveRecord::Base
   def self.abstract_class?
     true

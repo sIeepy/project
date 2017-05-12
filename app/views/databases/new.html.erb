@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@database) do |f| %>
+    <%= form_for @database, :html => {:autocomplete => "off"} do |f| %>
 
       <%= f.label :Database_name %>
       <%= f.text_field :db_name, class: 'form-control' %>

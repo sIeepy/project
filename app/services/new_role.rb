@@ -11,8 +11,7 @@ class NewRole < ApplicationController
     if result.present?
       return result
     else
-      form =  "CREATE ROLE #{@owner} CREATEDB;"
-      ActiveRecord::Base.connection.execute(form)
+      ActiveRecord::Base.connection.execute("CREATE USER #{@owner} CREATEDB")
     end
   end
 end

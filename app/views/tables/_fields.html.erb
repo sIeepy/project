@@ -1,7 +1,7 @@
-<fieldset>
+<fieldset id="new-row">
   <%= fields_for :table do |f| %>
-  <%= f.label :row, "Answer", index: index %>
-  <%= f.text_field :row, index: index  %>
+  <%= f.label :row, index: index %>
+  <%= f.text_field :row, index: index,  class: "restricted"  %>
   <%= f.select :data, %w[text boolean integer], {}, { index: index }%>
   <%end%>
 </fieldset>
