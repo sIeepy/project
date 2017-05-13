@@ -1,7 +1,14 @@
 <fieldset id="new-row">
   <%= fields_for :table do |f| %>
-  <%= f.label :row, index: index %>
+  <%= f.label :row%>
   <%= f.text_field :row, index: index,  class: "restricted"  %>
-  <%= f.select :data, %w[text boolean integer], {}, { index: index }%>
+  <%= f.check_box :required, index: index%>
+  <%= f.label :required %>
+  <%= f.check_box :unique, index: index %>
+  <%= f.label :unique %>
+  <%= f.check_box :primary_key, index: index %>
+  <%= f.label :primary_key %>
+  <%= f.text_field :lol, index: index, id: 'value', placeholder: 'Select data type'%>
+  <%= f.select :data, %w[text boolean integer varchar char money real time date timestamp ], {}, { index: index, id: 'list' }%>
   <%end%>
 </fieldset>
