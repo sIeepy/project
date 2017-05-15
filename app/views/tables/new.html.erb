@@ -3,10 +3,9 @@
       <%= f.label :table_name %><br>
       <%= f.text_field :table_name%>
 
-      <%= render "fields", index: 0%>
+        <%= render "fields", index: 0%>
 
       <%=button_tag 'Add more', type: 'button', id: 'add-column',
              data: { fields: render('fields', index: '__INDEX__').gsub('\n', '') }%>
-       <%=button_tag 'Remove', type: 'button', id: 'remove'%>
   <%= f.submit 'Create', class: "important"%>
 <% end %>

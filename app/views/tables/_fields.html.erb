@@ -1,14 +1,20 @@
-<fieldset id="new-row">
+<div class = "js-row">
   <%= fields_for :table do |f| %>
   <%= f.label :row%>
-  <%= f.text_field :row, index: index,  class: "restricted"  %>
-  <%= f.check_box :required, index: index%>
+  <%= f.text_field :row, index: index,  class: "restricted"%>
+
   <%= f.label :required %>
-  <%= f.check_box :unique, index: index %>
+  <%= f.check_box :required, index: index%>
+
   <%= f.label :unique %>
-  <%= f.check_box :primary_key, index: index %>
+  <%= f.check_box :unique, index: index %>
+
   <%= f.label :primary_key %>
-  <%= f.text_field :lol, index: index, id: 'value', placeholder: 'Select data type'%>
-  <%= f.select :data, %w[text boolean integer varchar char money real time date timestamp ], {}, { index: index, id: 'list' }%>
-  <%end%>
-</fieldset>
+  <%= f.check_box :primary_key, index: index, class: 'test' %>
+
+  <%= f.select :data, %w[text boolean integer varchar char money real time date timestamp ], {}, { index: index, class: 'list' }%>
+  <%= f.text_field :lol, index: index, id: 'value', placeholder: 'Input string length'%>
+  <% end %>
+  <%=button_tag 'Remove', type: 'button', class: 'remove',
+        data: {index: ('__INDEX__').gsub('\n', '') }%>
+</div>

@@ -15,16 +15,3 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
-
-$(document).ready(function(){
-    $('.important').attr('disabled',true);
-    $('.restricted').keyup(function(){
-        if($(this).val().trim().length != 0)
-            $('.important').attr('disabled', false);
-        else
-            $('.important').attr('disabled',true);
-    })
-});
-$('.restricted').click(function() {
-    $(this).val().replace(/ /g,'');
-});

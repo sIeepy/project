@@ -3,40 +3,63 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 counter = 1
 limit = 10
-$(document).on 'ready page:change', ->
-  $('#add-column').click ->
-    if counter == limit
-      	alert 'You have reached the limit of adding ' + counter + ' inputs'
-      else
-	      btn = $(this)
-  	    btn.before btn.data('fields').replace(/__INDEX__/g, counter++)
-     return
-   return
 
-$(document).on 'ready page:change', ->
-  $('#list').click ->
-    $('#list').change ->
-      myValue = $(this).val()
-      switch myValue
-        when 'text'
-          $('#value').prop 'placeholder', 'Text'
-        when 'boolean'
-          $('#value').prop 'placeholder', 'Boolean'
-        when 'integer'
-          $('#value').prop 'placeholder', 'Integer'
-        when 'varchar'
-          $('#value').prop 'placeholder', 'Change variable length'
-        when 'char'
-          $('#value').prop 'placeholder', 'Change variable length'
-        when 'money'
-          $('#value').prop 'placeholder', 'Money'
-        when 'real'
-          $('#value').prop 'placeholder', 'Real'
-        when 'time'
-          $('#value').prop 'placeholder', 'Time - HH:MM:SS'
-        when 'date'
-          $('#value').prop 'placeholder', 'Date - YYYY-MM-DD'
-        when 'timestamp'
-          $('#value').prop 'placeholder', 'Timestamp - YYYY-MM-DD HH:MM:SS'
-      return
-    return
+$(document).ready ->
+
+  $('.important').attr 'disabled', true
+
+  $('.important').click ->
+    $('.important').val().replace(/ /g,'')
+
+  $('.restricted').keypress ->
+    if $('.restricted').val().length != 0
+      $('.important').attr 'disabled', false
+
+  removeField = (button) ->
+    btn = $(button)
+    btn.parents('.js-row').remove()
+    btn.before btn.data('index').replace(/__INDEX__/g, counter--)
+
+  changeField = (button) ->
+    btn = $(button)
+    if btn.is(':checked')
+      $('#add-column').click ->
+        $('.test').prop 'disabled', true
+      btn.prop 'class', 'primary_key'
+      $('.test').prop 'disabled', true
+      btn.siblings('.remove').prop 'disabled', true
+    else
+      $('#add-column').click ->
+        $('.test').prop 'disabled', false
+      btn.prop 'class', 'test'
+      $('.test').prop 'disabled', false
+      btn.siblings('.remove').prop 'disabled', false
+
+  changeType = (button) ->
+    btn = $(button)
+    if btn.val() == 'varchar' || btn.val() == 'char'
+      btn.siblings('#value').show()
+    else
+      btn.siblings('#value').hide()
+
+  checkContent = (button) ->
+    btn = $(button)
+    if btn.val().length != 0
+      $('.important').attr 'disabled', false
+
+  $('#add-column').click ->
+    $('.important').attr 'disabled', true
+    if counter == limit
+      alert 'You have reached the limit of adding ' + counter + ' inputs'
+    else
+      btn = $(this)
+      btn.before btn.data('fields').replace(/__INDEX__/g, counter++)
+    $('.remove').click ->
+      removeField this
+    $('.test').change ->
+      changeField this
+    $('.list').change ->
+      changeType this
+    $('.restricted').keypress ->
+      checkContent this
+      console.log
