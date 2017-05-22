@@ -1,19 +1,8 @@
 <%provide(:title, "Database")%>
-    <% @bases.each do |base| %>
-    <div class="btn-group">
-      <%=link_to "#{base.db_name}", "", class: "btn btn-primary", role: "button"%>
-      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-        <span class="caret"></span>
-      </button>
-          <% if data_in? %>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Create new table", new_table_path(id: base.id)%></li>
-              <li><%= link_to "Show tables", show_table_path%></li>
-            </ul>
-          <%else%>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Connect to database", :session, connect_database_path(name: base.db_name)%></li>
-            </ul>
-          <% end %>
-        </div>
+  <%= form_for(:db_session, url: connect_database_path, :html => {:autocomplete => "off"}) do |f| %>
+    <%= f.label :database %>
+    <%= f.select :database, @bases.map {|base| base.db_name.to_s}%>
+    <%= f.label :remember_me, class: "checkbox inline" do %>
     <% end %>
+    <%= f.submit "Connect to the database", class: "btn btn-primary" %>
+  <% end %>

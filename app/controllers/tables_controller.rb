@@ -11,7 +11,7 @@ class TablesController < ApplicationController
       ur_id = current_user.id
       db_id = current_database.db_name
       t = params[:table]
-      t_n = params[:table][:table_name]
+      t_n = params[:table][:table_name].gsub(/^\d/, 't')
       CreateTable.new(db_id, ur_id, t).new_table
       redirect_to edit_table_show_path(table_name: t_n)
     else

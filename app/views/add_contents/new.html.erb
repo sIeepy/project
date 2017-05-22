@@ -4,7 +4,7 @@
   <thead>
   <% @row.each do |r|%>
     <th>
-      <%= r.name.to_s %>
+      <%= r.name.to_s %> (<%= r.type.to_s %>)
     </th>
     <%end%>
   </thead>
@@ -22,7 +22,19 @@
   <% @row.each_with_index do |r,i|%>
     <td>
     <%= f.fields_for :con do |w|%>
-      <%= w.text_field "#{i}"%>
+      <% if r.type.to_s == 'boolean' %>
+        <%= w.check_box "#{i}"%>
+      <% elsif r.type.to_s == 'integer' || r.type.to_s == 'money' || r.type.to_s == 'real' %>
+        <%= w.text_field "#{i}", onkeypress: "return isNumber(event)"%>
+      <% elsif r.type.to_s == 'date'%>
+        <%= w.text_field "#{i}", class: 'date', placeholder: 'YYYY-MM-DD'%>
+      <% elsif r.type.to_s == 'time'%>
+        <%= w.text_field "#{i}", class: 'time', placeholder: 'HH:MM:SS'%>
+      <% elsif r.type.to_s == 'string'%>
+        <%= w.text_field "#{i}", maxlength: r.limit.to_i %>
+      <% else %>
+        <%= w.text_field "#{i}" %>
+      <% end %>
     <% end %>
     </td>
   <%end%>

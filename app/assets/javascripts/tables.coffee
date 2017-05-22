@@ -3,17 +3,20 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 counter = 1
 limit = 10
+test = 1
 
 $(document).ready ->
 
-  $('.important').attr 'disabled', true
+  $('#important').attr 'disabled', true
 
-  $('.important').click ->
-    $('.important').val().replace(/ /g,'')
+  $('#important').click ->
+    $('#important').val().replace(/ /g,'')
 
   $('.restricted').keypress ->
-    if $('.restricted').val().length != 0
-      $('.important').attr 'disabled', false
+    if $('.restricted').val().trim().length != 0
+      $('#important').attr 'disabled', false
+    else
+      $('#important').attr 'disabled', true
 
   removeField = (button) ->
     btn = $(button)
@@ -28,12 +31,16 @@ $(document).ready ->
       btn.prop 'class', 'primary_key'
       $('.test').prop 'disabled', true
       btn.siblings('.remove').prop 'disabled', true
+      btn.siblings('.unique').prop 'disabled', true
+      btn.siblings('.required').prop 'disabled', true
     else
       $('#add-column').click ->
         $('.test').prop 'disabled', false
       btn.prop 'class', 'test'
       $('.test').prop 'disabled', false
       btn.siblings('.remove').prop 'disabled', false
+      btn.siblings('.unique').prop 'disabled', false
+      btn.siblings('.required').prop 'disabled', false
 
   changeType = (button) ->
     btn = $(button)
@@ -43,12 +50,15 @@ $(document).ready ->
       btn.siblings('#value').hide()
 
   checkContent = (button) ->
+    $('#important').attr 'disabled', true
     btn = $(button)
-    if btn.val().length != 0
-      $('.important').attr 'disabled', false
+    if btn.val().trim().length != 0
+      $('#important').attr 'disabled', false
+    else
+      $('#important').attr 'disabled', true
 
   $('#add-column').click ->
-    $('.important').attr 'disabled', true
+    $('#important').attr 'disabled', true
     if counter == limit
       alert 'You have reached the limit of adding ' + counter + ' inputs'
     else
@@ -60,6 +70,5 @@ $(document).ready ->
       changeField this
     $('.list').change ->
       changeType this
-    $('.restricted').keypress ->
+    $('.restricted').keyup ->
       checkContent this
-      console.log

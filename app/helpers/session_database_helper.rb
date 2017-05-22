@@ -1,6 +1,6 @@
 module SessionDatabaseHelper
   def data_in(database)
-    session[:database_id]= database.id
+    session[:database_id] = database.id
   end
 
   def data_remember(database)
@@ -29,8 +29,8 @@ module SessionDatabaseHelper
     !current_database.nil?
   end
 
-  def data_forget
-    user.data_forget
+  def data_forget(database)
+    database.data_forget
     cookies.delete(:database_id)
     cookies.delete(:remember_token)
   end

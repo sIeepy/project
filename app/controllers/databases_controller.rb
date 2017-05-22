@@ -1,5 +1,8 @@
 class DatabasesController < ApplicationController
 
+  def index
+  end
+  
   def new
     @database = Database.new :db_owner => current_user.name
   end
@@ -15,6 +18,7 @@ class DatabasesController < ApplicationController
       CreateDatabase.new(db_nm, ur_id, db_ur).create_schema
       redirect_to @database
     else
+      flash[:danger] = 'Input database name'
       render 'new'
     end
   end

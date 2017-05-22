@@ -19,7 +19,7 @@ class EditTablesController < ApplicationController
   def type
     @show.map.each do |row|
       @check = []
-      row.values.each {|col| @check << col}
+      row.values.each { |col| @check << col }
     end
   end
 

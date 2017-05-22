@@ -1,5 +1,6 @@
 <% provide(:title, "New table") %>
-  <%= form_for @table, :html => {autocomplete: "off"} do |f| %>
+
+  <%= form_for @table, :html => {:autocomplete => "off"}  do |f| %>
       <%= f.label :table_name %><br>
       <%= f.text_field :table_name%>
 
@@ -7,5 +8,5 @@
 
       <%=button_tag 'Add more', type: 'button', id: 'add-column',
              data: { fields: render('fields', index: '__INDEX__').gsub('\n', '') }%>
-  <%= f.submit 'Create', class: "important"%>
+  <%= f.submit 'Create', id: "important"%>
 <% end %>
