@@ -10,7 +10,8 @@ class CreateTable < ApplicationController
     c1 = []
     table.values.each { |k, v| c1 << k }
     c1.shift
-    col = c1.map { |h| h['row'].gsub(/\s+/, '_') }
+    c1.uniq! { |hash| hash['row'] }
+    col = c1.map { |h| h['row'] }
     data = c1.map { |h| h['data'] }
     unique = c1.map { |h| h['unique'] }
     size = c1.map { |h| h['size'] }
@@ -29,24 +30,29 @@ class CreateTable < ApplicationController
     end
   end
 
+  def col_name(col)
+    col.gsub(/^\d/, 't')
+    col.gsub(' ', '_')
+  end
+
   def condition(col, data, unique, required, primary_key, size)
     @output = []
     row = col.zip(data, unique, required, primary_key, size)
-    empty_check = row.reject {|c,d,u,r,pr,s| c.blank? }
+    empty_check = row.reject { |c, d, u, r, pr ,s| c.blank? }
     empty_check.each do |i|
       case
       when i[4] == '1'
-        @output << "#{i[0]} #{c_size(i[1], i[5])} PRIMARY KEY,"
+        @output << "#{col_name(i[0])} #{c_size(i[1], i[5])} PRIMARY KEY,"
       when i[2] == '1' && i[3] == '1'
-        @output << "#{i[0]} #{c_size(i[1], i[5])} NOT NULL UNIQUE,"
+        @output << "#{col_name(i[0])} #{c_size(i[1], i[5])} NOT NULL UNIQUE,"
       when i[2] == '1' && i[3] == '0'
-        @output << "#{i[0]} #{c_size(i[1], i[5])} NULL UNIQUE,"
+        @output << "#{col_name(i[0])} #{c_size(i[1], i[5])} NULL UNIQUE,"
       when i[2] == '0' && i[3] == '1'
-        @output << "#{i[0]} #{c_size(i[1], i[5])} NOT NULL,"
+        @output << "#{col_name(i[0])} #{c_size(i[1], i[5])} NOT NULL,"
       when i[2] == '0' && i[3] == '0'
-        @output << "#{i[0]} #{c_size(i[1], i[5])},"
+        @output << "#{col_name(i[0])} #{c_size(i[1], i[5])},"
       when i[4] == '0' && i[2]== '0' && i[3] == '0'
-        @output << "#{i[0]} #{c_size(i[1], i[5])},"
+        @output << "#{col_name(i[0])} #{c_size(i[1], i[5])},"
       end
     end
   end

@@ -1,30 +1,29 @@
 <% provide(:title, "#{@table}") %>
 <%= form_for(:table_edit, url: update_path, :html => {:autocomplete => "off"}) do |f| %>
-<h1><%=f.text_field :table_name, placeholder: "#{@table}" %></h1>
-    <%= f.hidden_field('old_t', value: "#{@table}")%>
-<table class="table">
-<thead>
-  <th>Column name</th>
-  <th>Data type</th>
-  <th>Remove</th>
-</thead>
-<tbody>
-<% @row.each_with_index do |r, i|%>
-<% binding.pry %>
-<tr>
-  <td><%= f.text_field :row, placeholder: r.name.to_s, index: i %>
-      <%= f.hidden_field('old_c', value: r.name.to_s, index: i)%></td>
-  <td><%= f.label "#{r.type}"%>
-    <% if @check.blank? %>
-      <%= f.select :data, %w[varchar char boolean integer money real time date], {include_blank: true}, { index: i } %>
-    <%end%>
-      <%= f.hidden_field('old_d', value: r.type.to_s, index: i)%></td>
- <td> <%= f.check_box :destroy, index: i %></td>
-</tr>
-
-<%end%>
-</tbody>
-</table>
-
+  <h1><%=f.text_field :table_name, placeholder: "#{@table}" %></h1>
+      <%= f.hidden_field('old_t', value: "#{@table}")%>
+  <table class="table">
+    <thead>
+      <th>Column name</th>
+      <th>Data type</th>
+      <th>Remove</th>
+    </thead>
+    <tbody>
+      <% @row.each_with_index do |r, i|%>
+        <tr>
+            <td><%= f.text_field :row, placeholder: r.name.to_s, index: i %>
+                <%= f.hidden_field('old_c', value: r.name.to_s, index: i)%></td>
+            <td><%= f.label "#{r.type}"%>
+              <% if @check.blank? %>
+                <%= f.select :data, %w[integer money real varchar char boolean time date], {include_blank: true}, { index: i } %>
+              <%end%>
+                <%= f.hidden_field('old_d', value: r.type.to_s, index: i)%></td>
+           <td> <%= f.check_box :destroy, index: i %></td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
   <%= f.submit "Update" %>
 <% end %>
+    <%=button_tag 'Add more', type: 'button', class: 'add-column',
+       data: {fields: render('form', index: '__INDEX__').gsub('\n', '')}%>

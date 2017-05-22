@@ -1,12 +1,11 @@
 <% provide(:title, "New table") %>
-
   <%= form_for @table, :html => {:autocomplete => "off"}  do |f| %>
       <%= f.label :table_name %><br>
       <%= f.text_field :table_name%>
 
         <%= render "fields", index: 0%>
 
-      <%=button_tag 'Add more', type: 'button', id: 'add-column',
-             data: { fields: render('fields', index: '__INDEX__').gsub('\n', '') }%>
-  <%= f.submit 'Create', id: "important"%>
+      <%=button_tag 'Add more', type: 'button', class: 'add-column',
+             data: {fields: render('fields', index: '__INDEX__').gsub('\n', '')}%>
+  <%= f.submit 'Create', id: "important", disabled: true, data: { no_turbolink: true }%>
 <% end %>

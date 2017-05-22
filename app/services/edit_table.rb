@@ -12,7 +12,8 @@ class EditTable
     table.values.each { |k, v| c1 << k }
     c1.shift
     c1.shift
-    @col = c1.map { |h| h['row'] }
+    c1.uniq! { |hash| hash['row'] }
+    @col = c1.map { |h| h['row'].gsub(/^\d/, 'c') }
     @data = c1.map { |h| h['data'] }
     @old_c = c1.map { |h| h['old_c'] }
     @old_d = c1.map { |h| h['old_d'] }

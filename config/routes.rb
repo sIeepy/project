@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/show_database', to: 'session_database#show'
   get '/connect_database', to: 'session_database#new'
   post '/connect_database', to: 'session_database#create'
-  delete '/disconnect_database', to: 'session_database#destroy'
+  delete '/disconnect', to: 'session_database#destroy'
   get 'new_table', to: 'tables#new'
   post 'new_table', to: 'tables#new'
   get 'show_table', to: 'tables#show'

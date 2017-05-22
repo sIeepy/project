@@ -18,7 +18,7 @@ class SessionDatabaseController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     data_out if data_in?
     redirect_to root_url
   end

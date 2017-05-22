@@ -4,8 +4,7 @@ class DatabasesController < ApplicationController
   end
 
   def new
-    @database = Database.new :db_owner => current_user.name
-    
+    @database = Database.new :db_owner => current_user.name    
   end
 
   def create
