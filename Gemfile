@@ -10,6 +10,7 @@ gem 'taps'
 gem 'puma', '~> 3.0'
 gem 'bcrypt',         '3.1.11'
 gem 'bootstrap-sass',   '3.3.6'
+gem 'bootstrap-datetimepicker-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -21,6 +22,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-mask-plugin'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -52,6 +54,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
+
 group :test do
   gem 'rails-controller-testing', '0.1.1'
   gem 'minitest-reporters',       '1.1.9'

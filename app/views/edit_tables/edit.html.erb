@@ -23,5 +23,25 @@
       <%end%>
     </tbody>
   </table>
-  <%= f.submit "Update" %>
+  <%= f.submit "Update", class:"btn btn-primary"%>
 <% end %>
+<button class="btn btn-primary" data-toggle="modal" data-target="#todo-notes"> Add column </button>
+<div class="modal fade" id="todo-notes" tabindex="-1" role="dialog" aria-labelledby="todo-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="todo-label">Add column</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for(:column, url: add_column_path, :html => {:autocomplete => "off"}) do |f| %>
+        <%= f.hidden_field('table_name', value: "#{@table}")%>
+        <%= render "form"%>
+        <%= f.submit %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

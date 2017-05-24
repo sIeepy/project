@@ -1,4 +1,4 @@
-class CreateTable < ApplicationController
+class CreateTable
   def initialize(database, user, table)
     @t_name = table[:table_name].gsub(/^\d/, 't')
     split(table)

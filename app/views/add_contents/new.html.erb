@@ -27,9 +27,23 @@
       <% elsif r.type.to_s == 'integer' || r.type.to_s == 'money' || r.type.to_s == 'real' %>
         <%= w.text_field "#{i}", onkeypress: "return isNumber(event)"%>
       <% elsif r.type.to_s == 'date'%>
-        <%= w.text_field "#{i}", class: 'date', placeholder: 'YYYY-MM-DD'%>
+      <div class="cointiner">
+        <div id="datepicker" class="input-append">
+            <%= w.text_field "#{i}", class: 'date', placeholder: 'YYYY-MM-DD', readonly: true%>
+              <span class="add-on">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
       <% elsif r.type.to_s == 'time'%>
-        <%= w.text_field "#{i}", class: 'time', placeholder: 'HH:MM:SS'%>
+      <div class="cointiner">
+        <div id="timepicker" class="input-append">
+            <%= w.text_field "#{i}", class: 'time', placeholder: 'HH:MM:SS', readonly: true%>
+              <span class="add-on">
+                <span class="glyphicon glyphicon-time"></span>
+              </span>
+            </div>
+          </div>
       <% elsif r.type.to_s == 'string'%>
         <%= w.text_field "#{i}", maxlength: r.limit.to_i %>
       <% else %>

@@ -4,3 +4,15 @@
 $(document).ready ->
   $('.date').mask("9999-99-99")
   $('.time').mask("99:99:99")
+
+  $ ->
+    $('#datepicker').datetimepicker
+      format: 'yyyy-MM-dd'
+      pickTime: false
+    return
+
+$ ->
+  $('#timepicker').datetimepicker
+    format: 'hh:mm:ss'
+    pickDate: false
+  return

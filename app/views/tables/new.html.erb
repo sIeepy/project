@@ -5,7 +5,7 @@
 
         <%= render "fields", index: 0%>
 
-      <%=button_tag 'Add more', type: 'button', class: 'add-column',
+      <%=button_tag 'Add more', type: 'button', id: 'add-column',
              data: {fields: render('fields', index: '__INDEX__').gsub('\n', '')}%>
   <%= f.submit 'Create', id: "important", disabled: true%>
 <% end %>

@@ -55,7 +55,7 @@ $(document).ready ->
     else
       $('#important').attr 'disabled', true
 
-  $('.add-column').click ->
+  $('#add-column').click ->
     $('#important').attr 'disabled', true
     if counter == limit
       alert 'You have reached the limit of adding ' + counter + ' inputs'

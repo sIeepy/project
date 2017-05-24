@@ -25,7 +25,10 @@ Rails.application.routes.draw do
   get 'add_contents/new', to: 'add_contents#new', as: 'new_content'
   post 'add_contents/add', to: 'add_contents#add', as: 'add_content'
   get 'add_contents/show', to: 'add_contents#show', as: 'show_content'
+  post 'columns/create', to: 'columns#create', as: 'add_column'
+  get 'columns/delete'
 
+  resources :columns
   resources :tables
   resources :users
   resources :databases
