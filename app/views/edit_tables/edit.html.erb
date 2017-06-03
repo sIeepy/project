@@ -11,15 +11,30 @@
     <tbody>
       <% @row.each_with_index do |r, i|%>
         <tr>
-            <td><%= f.text_field :row, placeholder: r.name.to_s, index: i %>
-                <%= f.hidden_field('old_c', value: r.name.to_s, index: i)%></td>
+          <% if r.name.to_s == @primary.to_s %>
+          <td><%= f.text_field :row, placeholder: r.name.to_s, index: i, readonly: true %>
+              <%= f.hidden_field('old_c', value: r.name.to_s, index: i)%><i class="fa fa-key"></i></td>
+              <td><%= f.label "#{r.type}"%>
+                <% if @check.blank? %>
+                  <%= f.select :data, %w[integer real varchar char boolean time date], {include_blank: true}, { index: i } %>
+                <%end%>
+                  <%= f.hidden_field('old_d', value: r.type.to_s, index: i)%></td>
+             <td> <%= f.check_box :destroy, index: i %></td>
+             <%= f.hidden_field('primary', value: true, index:i) %>
+          </tr>
+          <% else %>
+          <td><%= f.text_field :row, placeholder: r.name.to_s, index: i %>
+              <%= f.hidden_field('old_c', value: r.name.to_s, index: i)%></td>
             <td><%= f.label "#{r.type}"%>
               <% if @check.blank? %>
-                <%= f.select :data, %w[integer money real varchar char boolean time date], {include_blank: true}, { index: i } %>
+                <%= f.select :data, %w[integer real varchar char boolean time date], {include_blank: true}, { index: i } %>
               <%end%>
                 <%= f.hidden_field('old_d', value: r.type.to_s, index: i)%></td>
            <td> <%= f.check_box :destroy, index: i %></td>
+           <%= f.hidden_field('primary', value:false, index:i) %>
         </tr>
+          <% end %>
+
       <%end%>
     </tbody>
   </table>

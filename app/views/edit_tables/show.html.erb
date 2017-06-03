@@ -8,10 +8,15 @@
 <tbody>
 <% @row.each do |r|%>
   <tr>
-    <td><%= "#{r.name}" %></td>
-    <td><%= "#{r.type}" %></td>
+    <% if r.name.to_s == @primary.to_s %>
+    <td><%= r.name.to_s %>  <i class="fa fa-key"></i></td>
+    <% else %>
+    <td><%= r.name.to_s %></td>
+    <% end %>
+    <td><%= r.type.to_s %></td>
   </tr>
 <%end%>
 <tbody>
 <%= link_to "Edit table", edit_table_edit_path(table_name: @table)%>
 </table>
+<i class="glyphicon glyphicon-key"></i>

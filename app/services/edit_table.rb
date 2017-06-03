@@ -12,7 +12,7 @@ class EditTable
     table.values.each { |k, v| c1 << k }
     c1.shift
     c1.shift
-    c1.uniq! { |hash| hash['row'] }
+    #c1.uniq! { |hash| hash['row'] }
     @col = c1.map { |h| h['row'].gsub(/^\d/, 'c') }
     @data = c1.map { |h| h['data'] }
     @old_c = c1.map { |h| h['old_c'] }
@@ -22,7 +22,7 @@ class EditTable
 
   def empty_c(fresh, old)
     tog = fresh.zip(old, @delete)
-    @new_a = tog.reject { |f, o, d| f.blank? || d == 1}
+    @new_a = tog.reject { |f, o, d| f.blank? || d == 1 || f == o}
     unless @new_a.empty?
       @fresh_a = []
       @old_a = []
@@ -33,15 +33,13 @@ class EditTable
     end
   end
 
-  def empty_d(fresh, col)
-    tog = fresh.zip(col, @old_d, @delete)
-    @new_d = tog.reject { |f, c, o, d| f.blank? || o == f || d == 1 }
+  def empty_d(fresh)
+    tog = fresh.zip(@old_d, @delete)
+    @new_d = tog.reject { |f, o, d| f.blank? || o == f || d == 1 }
     unless @new_d.empty?
       @fresh_d = []
-      @col = []
-      @new_d.each do |f, c, o, d|
+      @new_d.each do |f, o, d|
         @fresh_d << f
-        @col << c
       end
     end
   end
@@ -115,18 +113,21 @@ class EditTable
   end
 
   def check_two(fresh, table)
-    if @col.nil?
-      empty_d(fresh, @old_c)
-      unless @new_d.empty?
-        @new_d.size.times do |i|
-          data_name(table, @col[i], @fresh_d[i])
+    w = @col.zip @old_c
+    w.each do |i,j|
+      if i.blank?
+        empty_d(fresh)
+        unless @new_d.empty?
+          @new_d.size.times do |i|
+            data_name(table, j, @fresh_d[i])
+          end
         end
-      end
-    else
-      empty_d(fresh, @col)
-      unless @new_d.empty?
-        @new_d.size.times do |i|
-          data_name(table, @col[i], @fresh_d[i])
+      else
+        empty_d(fresh, i)
+        unless @new_d.empty?
+          @new_d.size.times do |i|
+            data_name(table, i, @fresh_d[i])
+          end
         end
       end
     end

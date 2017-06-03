@@ -4,6 +4,7 @@ class EditTablesController < ApplicationController
     db_id = current_database.db_name
     @table = params[:table_name]
     @row = TablesContent.new(db_id, ur_id, @table).tables_content
+    @primary = PrimaryKey.new(db_id, ur_id, @table).primary_key
   end
 
   def edit
@@ -12,6 +13,7 @@ class EditTablesController < ApplicationController
     db_id = current_database.db_name
     @row = TablesContent.new(db_id, ur_id, @table).tables_content
     @show = ShowContent.new(db_id, ur_id, @table).show_content
+    @primary = PrimaryKey.new(db_id, ur_id, @table).primary_key
   end
 
   def update

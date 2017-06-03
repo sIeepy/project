@@ -11,12 +11,10 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.mask.min.js
 //= require bootstrap
 //= require bootstrap-datetimepicker
-//= require turbolinks
 //= require_tree .
 <!--
 function isNumber(evt)
