@@ -1,8 +1,11 @@
 <% provide(:title, "Tables") %>
-<h1><%=@database%></br></h1>
+<div class="row">
+  <div class="col-md-7 col-md-offset-3">
+<h1>Database: <%=@database%></br></h1>
+<div class="btn-group">
 <% @poka.each do |po| %>
   <div class="btn-group">
-    <%=link_to "#{po}", show_content_path(table_name: po), class: "btn btn-primary", role: "button"%>
+    <%=link_to "#{po}", show_content_path(table_name: po), class: "btn btn-primary btn-md", role: "button"%>
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
       <span class="caret"></span>
     </button>
@@ -12,4 +15,8 @@
       <li><%= link_to "Delete table", edit_table_delete_path(table_name: po)%></li>
     </ul>
   </div>
+
 <%end%>
+</div>
+</div>
+</div>

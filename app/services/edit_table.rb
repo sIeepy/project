@@ -12,35 +12,28 @@ class EditTable
     table.values.each { |k, v| c1 << k }
     c1.shift
     c1.shift
-    #c1.uniq! { |hash| hash['row'] }
+    c1.uniq! { |hash| hash['row'] }
     @col = c1.map { |h| h['row'].gsub(/^\d/, 'c') }
     @data = c1.map { |h| h['data'] }
     @old_c = c1.map { |h| h['old_c'] }
     @old_d = c1.map { |h| h['old_d'] }
-    @delete = c1.map { |h| h['destroy']}
+    @delete = c1.map { |h| h['destroy'] }
   end
 
-  def empty_c(fresh, old)
-    tog = fresh.zip(old, @delete)
-    @new_a = tog.reject { |f, o, d| f.blank? || d == 1 || f == o}
-    unless @new_a.empty?
+  def empty_c(fresh, old, delete)
+    if delete == 1 || fresh == old || fresh.blank? || @old_c.include?(fresh)
       @fresh_a = []
-      @old_a = []
-      @new_a.each do |f, o, d|
-        @fresh_a << f
-        @old_a << o
-      end
+    else
+      @fresh_a = [fresh]
+      @old_a = [old]
     end
   end
 
-  def empty_d(fresh)
-    tog = fresh.zip(@old_d, @delete)
-    @new_d = tog.reject { |f, o, d| f.blank? || o == f || d == 1 }
-    unless @new_d.empty?
-      @fresh_d = []
-      @new_d.each do |f, o, d|
-        @fresh_d << f
-      end
+  def empty_d(fresh, old, delete)
+    if delete == 1 || fresh == old || fresh.empty?
+      @new_d = []
+    else
+      @new_d = [fresh]
     end
   end
 
@@ -95,38 +88,40 @@ class EditTable
   def rename_row
     ConnectDatabase.new(@database, @user).connection
     if @table_name != ''
-      check_one(@col, @old_c, @table_name)
-      check_two(@data, @table_name)
+      check_one(@table_name)
+      check_two(@table_name)
     else
-      check_one(@col, @old_c, @table_name_old)
-      check_two(@data, @table_name_old)
+      check_one(@table_name_old)
+      check_two(@table_name_old)
     end
   end
 
-  def check_one(fresh, old, table)
-    empty_c(fresh, old)
-    unless @new_a.empty?
-      @new_a.size.times do |i|
-        column_name(table, @fresh_a[i], @old_a[i])
+  def check_one(table)
+    w = @col.zip(@old_c, @delete)
+    w.each do |col, old_col, delete|
+      empty_c(col, old_col, delete)
+      unless @fresh_a.empty?
+        @fresh_a.size.times do |i|
+          column_name(table, @fresh_a[i], @old_a[i])
+        end
       end
     end
   end
 
-  def check_two(fresh, table)
-    w = @col.zip @old_c
-    w.each do |i,j|
-      if i.blank?
-        empty_d(fresh)
+  def check_two(table)
+    w = @col.zip(@old_c, @data, @old_d, @delete)
+    w.each do |col, old_col, data, old_data, delete|
+      empty_d(data, old_data, delete)
+      if col.blank?
         unless @new_d.empty?
           @new_d.size.times do |i|
-            data_name(table, j, @fresh_d[i])
+            data_name(table, old_col, @new_d[i])
           end
         end
       else
-        empty_d(fresh, i)
         unless @new_d.empty?
           @new_d.size.times do |i|
-            data_name(table, i, @fresh_d[i])
+            data_name(table, col, @new_d[i])
           end
         end
       end

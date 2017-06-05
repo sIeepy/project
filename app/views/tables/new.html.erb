@@ -1,11 +1,17 @@
 <% provide(:title, "New table") %>
+<div class = "center">
   <%= form_for @table, :html => {:autocomplete => "off"}  do |f| %>
-      <%= f.label :table_name %><br>
+      <%= f.label :table_name %>
       <%= f.text_field :table_name%>
-
+    </div>
+      <div class="row">
+        <div class="col-md-7 col-md-offset-3">
         <%= render "fields", index: 0%>
 
       <%=button_tag 'Add more', type: 'button', id: 'add-column',
-             data: {fields: render('fields', index: '__INDEX__').gsub('\n', '')}%>
-  <%= f.submit 'Create', id: "important", disabled: true%>
+             data: {fields: render('fields', index: '__INDEX__').gsub('\n', '')},
+             class:"btn btn-primary btn-md"%>
+  <%= f.submit 'Create', id: "important", disabled: true, class:"btn btn-primary btn-md"%>
 <% end %>
+</div>
+</div>

@@ -1,4 +1,6 @@
 <% provide(:title, "#{@table}") %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
 <%= form_for(:table_edit, url: update_path, :html => {:autocomplete => "off"}) do |f| %>
   <h1><%=f.text_field :table_name, placeholder: "#{@table}" %></h1>
       <%= f.hidden_field('old_t', value: "#{@table}")%>
@@ -38,11 +40,15 @@
       <%end%>
     </tbody>
   </table>
+  <div class = "center">
   <%= f.submit "Update", class:"btn btn-primary"%>
+  </div>
 <% end %>
+
+<div class = "center" >
 <button class="btn btn-primary" data-toggle="modal" data-target="#todo-notes"> Add column </button>
 <div class="modal fade" id="todo-notes" tabindex="-1" role="dialog" aria-labelledby="todo-label" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="todo-label">Add column</h4>
@@ -51,7 +57,7 @@
         <%= form_for(:column, url: add_column_path, :html => {:autocomplete => "off"}) do |f| %>
         <%= f.hidden_field('table_name', value: "#{@table}")%>
         <%= render "form"%>
-        <%= f.submit %>
+        <%= f.submit "Add column", class:"btn btn-primary" %>
         <% end %>
       </div>
       <div class="modal-footer">
@@ -59,4 +65,7 @@
       </div>
     </div>
   </div>
+</div>
+</div>
+</div>
 </div>

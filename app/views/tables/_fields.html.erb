@@ -16,5 +16,5 @@
   <%= f.text_field :size, index: index, id: 'value', placeholder: 'Input string length'%>
   <% end %>
   <%=button_tag 'Remove', type: 'button', class: 'remove',
-        data: {index: ('__INDEX__').gsub('\n', '') }%>
+        data: {index: ('__INDEX__').gsub('\n', '') }, class:"btn btn-primary"%>
 </div>

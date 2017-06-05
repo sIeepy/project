@@ -1,5 +1,9 @@
 <% provide(:title, "#{@table}") %>
-  <h1><%= @table %></h1>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h1>Table name: <%= @table %></h1>
+        <div class="table-responsive">
 <table class="table">
   <thead>
     <th>Column name</th>
@@ -17,6 +21,10 @@
   </tr>
 <%end%>
 <tbody>
-<%= link_to "Edit table", edit_table_edit_path(table_name: @table)%>
 </table>
-<i class="glyphicon glyphicon-key"></i>
+<div class = "center_button" >
+<%= link_to "Edit table", edit_table_edit_path(table_name: @table), class: "btn btn-primary"%>
+</div>
+</div>
+</div>
+</div>

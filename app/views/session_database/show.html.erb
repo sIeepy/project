@@ -1,8 +1,12 @@
 <%provide(:title, "Database")%>
+<div class="row">
+  <div class="col-md-6 col-md-offset-4">
   <%= form_for(:db_session, url: connect_database_path, :html => {:autocomplete => "off"}) do |f| %>
-    <%= f.label :database %>
-    <%= f.select :database, @bases.map {|base| base.db_name.to_s}%>
-    <%= f.label :remember_me, class: "checkbox inline" do %>
-    <% end %>
-    <%= f.submit "Connect to the database", class: "btn btn-primary" %>
+    <h1><%= f.label :database %> </br></h1>
+    <div class = "center">
+    <%= f.select :database, @bases.map {|base| base.db_name.to_s}%></br>
+    <%= f.submit "Connect to the database", class: "btn btn-primary btn-md" %>
+  </div>
   <% end %>
+</div>
+</div>
