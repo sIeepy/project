@@ -12,9 +12,9 @@
   <%= f.label :primary_key %>
   <%= f.check_box :primary_key, index: index, class: 'test' %>
 
-  <%= f.select :data, %w[integer money real varchar char boolean time date], {}, { index: index, class: 'list' }%>
+  <%= f.select :data, %w[integer real varchar char boolean time date], {}, { index: index, class: 'list' }%>
   <%= f.text_field :size, index: index, id: 'value', placeholder: 'Input string length'%>
   <% end %>
   <%=button_tag 'Remove', type: 'button', class: 'remove',
-        data: {index: ('__INDEX__').gsub('\n', '') }, class:"btn btn-primary"%>
+        data: {index: ('__INDEX__').gsub('\n', '') }%>
 </div>
