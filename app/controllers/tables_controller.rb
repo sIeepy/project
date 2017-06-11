@@ -8,11 +8,9 @@ class TablesController < ApplicationController
   def create
     @table = Table.new(table_params)
     if @table.valid?
-      ur_id = current_user.id
-      db_id = current_database.db_name
       t = params[:table]
       t_n = params[:table][:table_name].gsub(/^\d/, 't')
-      CreateTable.new(db_id, ur_id, t).new_table
+      CreateTable.new(name[1], name[0], t).new_table
       redirect_to edit_table_show_path(table_name: t_n)
     else
       redirect_to new_table_path
@@ -20,10 +18,8 @@ class TablesController < ApplicationController
   end
 
   def show
-    ur_id = current_user.id
-    db_id = current_database.db_name
-    @database = db_id
-    @poka = ShowTables.new(db_id, ur_id).show_tables
+    @database = name[1]
+    @poka = ShowTables.new(name[1], name[0]).show_tables
   end
 
   private

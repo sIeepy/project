@@ -18,14 +18,12 @@
               <%= f.hidden_field('old_c', value: r.name.to_s, index: i)%><i class="fa fa-key"></i></td>
               <td> <%= r.type.to_s  %></td>
              <td> <%= f.hidden_field('destroy', value: 0, index:i)%></td>
-             <%= f.hidden_field('primary', value: true, index:i) %>
           </tr>
           <% else %>
           <td><%= f.text_field :row, placeholder: r.name.to_s, index: i %>
               <%= f.hidden_field('old_c', value: r.name.to_s, index: i)%></td>
           <td> <%= r.type.to_s  %></td>
            <td> <%= f.check_box :destroy, index: i %></td>
-           <%= f.hidden_field('primary', value:false, index:i) %>
         </tr>
           <% end %>
 

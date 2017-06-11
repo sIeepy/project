@@ -1,36 +1,28 @@
 class EditTablesController < ApplicationController
   def show
-    ur_id = current_user.id
-    db_id = current_database.db_name
     @table = params[:table_name]
-    @row = TablesContent.new(db_id, ur_id, @table).tables_content
-    @primary = PrimaryKey.new(db_id, ur_id, @table).primary_key
+    @row = TablesContent.new(name[1], name[0], @table).tables_content
+    @primary = PrimaryKey.new(name[1], name[0], @table).primary_key
   end
 
   def edit
     @table = params[:table_name]
-    ur_id = current_user.id
-    db_id = current_database.db_name
-    @row = TablesContent.new(db_id, ur_id, @table).tables_content
-    @show = ShowContent.new(db_id, ur_id, @table).show_content
-    @primary = PrimaryKey.new(db_id, ur_id, @table).primary_key
+    @row = TablesContent.new(name[1], name[0], @table).tables_content
+    @show = ShowContent.new(name[1], name[0], @table).show_content
+    @primary = PrimaryKey.new(name[1], name[0], @table).primary_key
   end
 
   def update
     @table = params[:table_edit]
-    ur_id = current_user.id
-    db_id = current_database.db_name
-    name = EditTable.new(db_id, ur_id, @table).rename_table
-    EditTable.new(db_id, ur_id, @table).rename_row
-    EditTable.new(db_id, ur_id, @table).drop_col
-    redirect_to edit_table_show_path(table_name: name)
+    tab_name = EditTable.new(name[1], name[0], @table).rename_table
+    EditTable.new(name[1], name[0], @table).rename_row
+    EditTable.new(name[1], name[0], @table).drop_col
+    redirect_to edit_table_show_path(table_name: tab_name)
   end
 
   def delete
     @table = params[:table_name]
-    ur_id = current_user.id
-    db_id = current_database.db_name
-    DeleteTable.new(db_id, ur_id, @table).delete_table
+    DeleteTable.new(name[1], name[0], @table).delete_table
     redirect_to show_table_path
   end
 end

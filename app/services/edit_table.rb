@@ -1,32 +1,48 @@
 class EditTable
-  def initialize(database, user, table)
+  def initialize(database, user, content)
     @database = database
     @user = user
-    @table_name = table[:table_name]
-    @table_name_old = table[:old_t]
-    split(table)
+    @table_name = content[:table_name]
+    @table_name_old = content[:old_t]
+    get_content(content)
   end
 
-  def split(table)
-    c1 = []
-    table.values.each { |k, v| c1 << k }
-    c1.shift
-    c1.shift
-    c1.uniq! { |hash| hash['row'] }
+  def split(c1)
     @col = c1.map { |h| h['row'].gsub(/^\d/, 'c') }
     @old_c = c1.map { |h| h['old_c'] }
     @delete = c1.map { |h| h['destroy'] }
   end
 
+  def get_content(content)
+    c1 = []
+    content.values.each { |k| c1 << k }
+    c1.shift
+    c1.shift
+    name_check(c1)
+  end
+
+  def name_check(ready_content)
+    new_name = []
+    ready_content.each_with_index do |h, i|
+      unless h['row'].empty?
+        new_name << [h['row'], i]
+      end
+    end
+    @repeat = new_name - new_name.uniq { |i, _j| i }
+    @repeat.count.times do |_i|
+      @repeat.each { |_i, j| ready_content.delete_at(j) }
+    end
+    split(ready_content)
+  end
+
   def empty_c(fresh, old, delete)
-    if delete == 1 || fresh == old || fresh.blank? || @old_c.include?(fresh)
+    if delete == 1 || fresh == old || fresh.blank? || @old_c.include?(fresh) || @repeat[0].include?(fresh)
       @fresh_a = []
     else
       @fresh_a = [fresh]
       @old_a = [old]
     end
   end
-
 
   def drop
     tog = @old_c.zip @delete

@@ -8,12 +8,7 @@
 
   <%= f.label :unique %>
   <%= f.check_box :unique%>
-  <% if @primary.nil? %>
-    <%= f.label :primary_key %>
-    <%= f.check_box :primary_key, class: 'primary_key' %>
-    <% else %>
-    <%= f.hidden_field('primary', value: false) %>
-  <% end %>
+
   <%= f.select :data, %w[varchar char integer real boolean time date], {}, {class: 'add_list' }%>
   <%= f.text_field :size, class: 'add_value', placeholder: 'Input string length'%>
   <% end %>

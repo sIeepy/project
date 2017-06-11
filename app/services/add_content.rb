@@ -1,4 +1,4 @@
-class AddContent
+class AddContent_name
   def initialize(database, user, content)
     @table_name = content[:table_name]
     @database = database

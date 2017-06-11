@@ -1,12 +1,10 @@
 class SessionDatabaseController < ApplicationController
   skip_before_action :verify_authenticity_token
   def show
-    @bases = Database.where(["db_owner = :db_owner",
-                          { :db_owner => current_user.name }])
+    @bases = Database.where(['db_owner = :db_owner', { db_owner: current_user.name }])
   end
 
-  def new
-  end
+  def new; end
 
   def create
     database = Database.find_by(db_name: params[:db_session][:database])
