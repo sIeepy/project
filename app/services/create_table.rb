@@ -8,7 +8,7 @@ class CreateTable
 
   def split(table)
     c1 = []
-    table.values.each { |k, v| c1 << k }
+    table.values.each { |k, _v| c1 << k }
     c1.shift
     c1.uniq! { |hash| hash['row'] }
     col = c1.map { |h| h['row'] }
@@ -38,7 +38,7 @@ class CreateTable
   def condition(col, data, unique, required, primary_key, size)
     @output = []
     row = col.zip(data, unique, required, primary_key, size)
-    empty_check = row.reject { |c, d, u, r, pr ,s| c.blank? }
+    empty_check = row.reject { |c, _d, _u, _r, _pr ,_s| c.blank? }
     empty_check.each do |i|
       case
       when i[4] == '1'
@@ -51,7 +51,7 @@ class CreateTable
         @output << "#{col_name(i[0])} #{c_size(i[1], i[5])} NOT NULL,"
       when i[2] == '0' && i[3] == '0'
         @output << "#{col_name(i[0])} #{c_size(i[1], i[5])},"
-      when i[4] == '0' && i[2]== '0' && i[3] == '0'
+      when i[4] == '0' && i[2] == '0' && i[3] == '0'
         @output << "#{col_name(i[0])} #{c_size(i[1], i[5])},"
       end
     end

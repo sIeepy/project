@@ -46,10 +46,10 @@ class EditTable
 
   def drop
     tog = @old_c.zip @delete
-    @d_list = tog.reject { |o, d| d == '0' }
+    @d_list = tog.reject { |_o, d| d == '0' }
     unless @d_list.empty?
       @del = []
-      @d_list.each do |i, j|
+      @d_list.each do |i, _j|
         @del << i
       end
     end

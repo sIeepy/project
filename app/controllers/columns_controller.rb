@@ -1,5 +1,4 @@
 class ColumnsController < ApplicationController
-
   def create
     @column = Column.new(column_params)
     t_n = params[:column][:table_name]

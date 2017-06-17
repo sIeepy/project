@@ -8,13 +8,13 @@ class AddContent_name
 
   def split(content)
     c1 = []
-    content.values.each { |k, v| c1 << k }
+    content.values.each { |k, _v| c1 << k }
     c1.shift
     value = c1.shift
     lol = []
-    value.map { |k, v| lol << v }
+    value.map { |_k, v| lol << v }
     tog = lol.zip c1
-    @val = tog.reject { |i, j| i.empty?}
+    @val = tog.reject { |i, _j| i.empty?}
   end
 
   def check_one
@@ -23,7 +23,7 @@ class AddContent_name
     else
       c2 = []
       c3 = []
-      @val.each do |j,k|
+      @val.each do |j, k|
         c2 << j
         c3 << k
       end
@@ -32,7 +32,8 @@ class AddContent_name
   end
 
   def add_content(name, content)
-    insert = "INSERT INTO #{@table_name} (#{name.map(&:inspect).join(', ')}) VALUES (#{content.map(&:inspect).join(', ').gsub(/"/, "'")})"
+    insert = "INSERT INTO #{@table_name} (#{name.map(&:inspect).join(', ')})
+              VALUES (#{content.map(&:inspect).join(', ').gsub(/"/, "'")})"
     RemoteConnect.connection.execute(insert)
   end
 
