@@ -1,0 +1,10 @@
+%div
+  = fields_for :column do |f|
+    = f.label :row
+    = f.text_field :row
+    = f.label :required
+    = f.check_box :required
+    = f.label :unique
+    = f.check_box :unique
+    = f.select :data, %w[varchar char integer real boolean time date], {}, {class: 'add_list' }
+    = f.text_field :size, class: 'add_value', placeholder: 'Input string length'

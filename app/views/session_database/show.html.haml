@@ -1,0 +1,9 @@
+- provide(:title, "Database")
+.row
+  .col-md-6.col-md-offset-4
+    = form_for(:db_session, url: connect_database_path, :html => {:autocomplete => "off"}) do |f|
+      %h1
+        = f.label :database
+      .center
+        = f.select :database, @bases.map {|base| base.db_name.to_s}
+        = f.submit "Connect to the database", class: "btn btn-primary btn-md"

@@ -1,0 +1,23 @@
+- provide(:title, "#{@table}")
+.row
+  .col-md-6.col-md-offset-3
+    %h1
+      Table name: #{@table}
+    .table-responsive
+      %table.table
+        %thead
+          %th Column name
+          %th Data type
+        %tbody
+          - @row.each do |r|
+            %tr
+              - if r.name.to_s == @primary.to_s
+                %td
+                  = r.name.to_s
+                  %i.fa.fa-key
+              - else
+                %td= r.name.to_s
+              %td= r.type.to_s
+        %tbody
+      .center_button
+        = link_to "Edit table", edit_table_edit_path(table_name: @table), class: "btn btn-primary"

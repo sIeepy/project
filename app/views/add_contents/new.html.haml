@@ -1,0 +1,51 @@
+- provide(:title, "#{@table}")
+.row
+  .col-md-10.col-md-offset-1
+    %h1= @table
+    %table.table
+      %thead
+        - @row.each do |r|
+          %th
+            = r.name.to_s
+            (#{r.type.to_s})
+      %tbody
+        - @show.map.each do |row|
+          %tr
+            - row.values.each do |col|
+              %td
+                = col
+        = form_for(:content, url: add_content_path, :html => {:autocomplete => "off"}) do |f|
+          = f.hidden_field :table_name, value: @table
+          %tr
+            - @row.each_with_index do |r,i|
+              %td
+                = f.fields_for :con do |w|
+                  - if r.name.to_s == @primary.to_s
+                    %i.fa.fa-key
+                    = w.hidden_field('primary', value: true, index:i, id: 'primary')
+                  - else
+                    = w.hidden_field('primary', value: false, index:i, id: 'primary')
+                  - if r.type.to_s == 'boolean'
+                    = w.check_box "#{i}"
+                  - elsif r.type.to_s == 'integer' || r.type.to_s == 'money' || r.type.to_s == 'real'
+                    = w.text_field "#{i}", onkeypress: "return isNumber(event)"
+                  - elsif r.type.to_s == 'date'
+                    .cointiner
+                      #datepicker.input-append
+                        = w.text_field "#{i}", class: 'date', placeholder: 'YYYY-MM-DD', readonly: true
+                        %span.add-on
+                          %span.glyphicon.glyphicon-calendar
+                  - elsif r.type.to_s == 'time'
+                    .cointiner
+                      #timepicker.input-append
+                        = w.text_field "#{i}", class: 'time', placeholder: 'HH:MM:SS', readonly: true
+                        %span.add-on
+                          %span.glyphicon.glyphicon-time
+                  - elsif r.type.to_s == 'string'
+                    = w.text_field "#{i}", maxlength: r.limit.to_i
+                  - else
+                    = w.text_field "#{i}"
+                  = f.hidden_field "#{i}", value: r.name.to_s
+          %tbody
+    .center
+      = f.submit "Save content", class:"btn btn-primary btn-md"

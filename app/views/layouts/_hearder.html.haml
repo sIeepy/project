@@ -1,0 +1,37 @@
+%body
+  %header.navbar.navbar-fixed-top.navbar-inverse
+    %nav
+      %ul.nav.navbar-nav.navbar-right
+        %li= link_to "Home", root_path
+        - if data_in? && logged_in?
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Table
+              %b.caret
+            %ul.dropdown-menu
+              %li= link_to "New", new_table_path
+              %li= link_to "Menage", show_table_path
+        - if logged_in?
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Database
+              %b.caret
+            %ul.dropdown-menu
+              %li= link_to "New", create_path
+              - if data_in?
+                %li= link_to "Disconnect", disconnect_path, method: "delete"
+              - else
+                %li= link_to "Connect", show_database_path
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Account
+              %b.caret
+            %ul.dropdown-menu
+              %li= link_to "Profile", current_user
+              %li= link_to "Settings", edit_user_path(current_user)
+              %li.divider
+              %li
+                = link_to "Log out", logout_path, method: "delete"
+        - else
+          %li= link_to "Log in", login_path
+          %li= link_to "Sign up", signup_path

@@ -1,0 +1,8 @@
+- provide(:title, @database.db_name)
+.center
+  %h1
+    Database name: #{@database.db_name}
+
+    Create new table:
+  = button_to "Create", new_table_path, method: :new, |
+    class:"btn btn-primary btn-lg"                    |

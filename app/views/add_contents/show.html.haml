@@ -1,0 +1,18 @@
+- provide(:title, "#{@table}")
+.row
+  .col-md-6.col-md-offset-3
+    %h1= @table
+    %table.table
+      %thead
+        - @row.each do |r|
+          %th
+            = "#{r.name}"
+      %tbody
+        - @show.map.each do |row|
+          %tr
+            - row.values.each do |col|
+              %td
+                = col
+      %tbody
+    .center
+      = link_to "Add content", new_content_path(table_name: @table), class: "btn btn-primary"

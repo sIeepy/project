@@ -1,0 +1,11 @@
+- provide(:title, "New table")
+.col-md-9.col-md-offset-2
+  .center
+    = form_for @table, :html => {:autocomplete => "off"}  do |f|
+      = f.label :table_name
+      = f.text_field :table_name
+      = render "fields", index: 0
+      = button_tag 'Add more', type: 'button', id: 'add-column',             |
+        data: {fields: render('fields', index: '__INDEX__').gsub('\n', '')}, |
+        class:"btn btn-primary btn-md"                                       |
+      = f.submit 'Create', id: "important", disabled: true, class:"btn btn-primary btn-md"
