@@ -23,6 +23,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-mask-plugin'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'factory_girl_rails'
 #gem 'jquery-turbolinks'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 #gem 'turbolinks', '~> 5'
@@ -32,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'mocha'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem "haml"
@@ -61,6 +62,7 @@ group :test do
   gem 'rails-controller-testing', '0.1.1'
   gem 'minitest-reporters',       '1.1.9'
   gem 'guard',                    '2.13.0'
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
   gem 'guard-minitest',           '2.4.4'
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
